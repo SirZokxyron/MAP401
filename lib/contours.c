@@ -1,6 +1,4 @@
-#include "contours.h"
-
-
+#include "../interfaces/contours.h"
 
 /* Fonctions pour determiner le contour d'une image */
 
@@ -34,4 +32,5 @@
             }
         }
         memoriser_pos(&r);
+        affiche_liste(r.memoire);
     }

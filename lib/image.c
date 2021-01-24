@@ -5,8 +5,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"types_macros.h"
-#include"image.h"
+#include"../interfaces/types_macros.h"
+#include"../interfaces/image.h"
 
 /* Macro donnant l'indice d'un pixel de coordonnees (_x,_y) de l'image _I */
 #define INDICE_PIXEL(_I,_x,_y) ((_x)-1)+(_I).L*((_y)-1)

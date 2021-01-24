@@ -1,4 +1,4 @@
-#include "liste.h"
+#include "../interfaces/liste.h"
 
 /* Fonctions pour gerer la structure liste chainee */
 
@@ -6,10 +6,11 @@
     cellule * init_cellule(Point p) {
         cellule * cell = (cellule *)malloc(sizeof(cellule));
         cell->p = p;
+        return cell; 
     }
 
     /* Initialise une liste vide */
-    void init_list(liste * L) {
+    void init_liste(liste * L) {
         L->tete = NULL;
         L->queue = NULL;
     }
@@ -29,9 +30,9 @@
     void affiche_liste(liste L) {
         if (L.tete) {
             cellule * cell = L.tete;
-            affiche_point(cell->p);
+            affiche_point(cell->p, "Point : ");
             while (cell->suivant) {
-                affiche_point(cell->suivant->p);
+                affiche_point(cell->suivant->p, "Point : ");
                 cell = cell->suivant;
             }
         }

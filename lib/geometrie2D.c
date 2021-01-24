@@ -1,4 +1,4 @@
-#include "geometrie2D.h"
+#include "../interfaces/geometrie2D.h"
 
 /* Fonctions pour les points */
 

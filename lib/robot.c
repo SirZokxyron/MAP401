@@ -1,4 +1,4 @@
-#include "robot.h"
+#include "../interfaces/robot.h"
 
 /* Fonctions pour controller le robot */
 
@@ -6,7 +6,7 @@
     Point init_robot(Robot * r, Image I) {
         r->pos = sub_point(pos_depart(I), set_point(1, 1));
         r->ori = Est;
-        init_liste(r->memoire);
+        init_liste(&r->memoire);
         return r->pos;
     }
 
