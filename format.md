@@ -15,7 +15,3 @@ typedef struct type_ {
 } type;
 
 ERREUR_FATALE("[Erreur]\tnom_fonction\tExplication_erreur.");
-
-Espace le plus important : 
-
-    [...], [...]

@@ -22,10 +22,13 @@
 CC = clang
 
 # chemin d'acces aux librairies (interfaces)
-INCDIR = .
+INCDIR = ./interfaces/
 
 # chemin d'acces aux librairies (binaires)
-LIBDIR = .
+LIBDIR = ./librairies/
+
+# chemin d'acces aux executables (binaires)
+EXEDIR = ./executables/
 
 # options pour l'edition des liens
 LDOPTS = -L$(LIBDIR) -lm
@@ -53,55 +56,64 @@ all : $(EXECUTABLES)
 #  remplace les regles de compilation separee de la forme
 #	module.o : module.c module.h
 #		$(CC) -c $(COMPILOPTS) module.c
-%.o : %.c %.h
+%.o : $(LIBDIR)%.c
 	@echo ""
 	@echo "---------------------------------------------"
 	@echo "Compilation du module "$*
 	@echo "---------------------------------------------"
 	$(CC) -c $(COMPILOPTS) $<
 
+%.o : $(EXEDIR)%.c
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Compilation du module "$*
+	@echo "---------------------------------------------"
+	$(CC) -c $(COMPILOPTS) $<
+
+% : %.o
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Creation de l'executable "$@
+	@echo "---------------------------------------------"
+	$(CC) $^ $(LDOPTS) -o $@
+
 ########################################################
 # regles explicites de compilation separee de modules
 # n'ayant pas de fichier .h ET/OU dependant d'autres modules
 
-image.o : image.c image.h types_macros.h
+image.o : $(LIBDIR)image.c $(INCDIR)image.h $(INCDIR)types_macros.h
+test_image.o : $(EXEDIR)test_image.c $(INCDIR)image.h 
 
-test_image.o : test_image.c image.h 
+geometrie2D.o : $(LIBDIR)geometrie2D.c $(INCDIR)geometrie2D.h $(INCDIR)types_macros.h
+test_geometrie.o : $(EXEDIR)test_geometrie.c $(INCDIR)geometrie2D.h 
 
-geometrie2D.o : geometrie2D.c geometrie2D.h types_macros.h
-
-test_geometrie.o : test_geometrie.c geometrie2D.h 
-
-contours.o : contours.c contours.h geometrie2D.h image.h robot.h
-
-robot.o : robot.c robot.h contours.h
-
-test_contours.o : test_contours.c robot.h contours.h 
+contours.o : $(LIBDIR)contours.c $(INCDIR)contours.h $(INCDIR)geometrie2D.h $(INCDIR)image.h $(INCDIR)robot.h $(INCDIR)types_macros.h
+liste.o : $(LIBDIR)liste.c $(INCDIR)liste.h $(INCDIR)geometrie2D.h $(INCDIR)types_macros.h
+robot.o : $(LIBDIR)robot.c $(INCDIR)robot.h $(INCDIR)contours.h $(INCDIR)types_macros.h $(INCDIR)liste.h
+test_contours.o : $(EXEDIR)test_contours.c $(INCDIR)robot.h $(INCDIR)contours.h
 
 ########################################################
 # regles explicites de creation des executables
 
 test_image : test_image.o image.o 
-	@echo ""
-	@echo "---------------------------------------------"
-	@echo "Creation de l'executable "$@
-	@echo "---------------------------------------------"
-	$(CC) $^ $(LDOPTS) -o $@
 
 test_geometrie : test_geometrie.o geometrie2D.o
-	@echo ""
-	@echo "---------------------------------------------"
-	@echo "Creation de l'executable "$@
-	@echo "---------------------------------------------"
-	$(CC) $^ $(LDOPTS) -o $@
 
-test_contours : test_contours.o contours.o robot.o geometrie2D.o image.o
-	@echo ""
-	@echo "---------------------------------------------"
-	@echo "Creation de l'executable "$@
-	@echo "---------------------------------------------"
-	$(CC) $^ $(LDOPTS) -o $@
+test_contours : test_contours.o contours.o robot.o geometrie2D.o image.o liste.o
 
 # regle pour "nettoyer" le repertoire
 clean:
-	rm -fR $(EXECUTABLES) *.o 
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Suppression des fichiers .o "
+	@echo "---------------------------------------------"
+	rm -fR *.o
+
+# regle pour supprimer les executables
+
+clear:
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Suppression des executables"
+	@echo "---------------------------------------------"
+	rm -fR $(EXECUTABLES)
