@@ -30,9 +30,9 @@
     void affiche_liste(liste L) {
         if (L.tete) {
             cellule * cell = L.tete;
-            affiche_point(cell->p, "Point : ");
+            affiche_point(cell->p, "Point");
             while (cell->suivant) {
-                affiche_point(cell->suivant->p, "Point : ");
+                affiche_point(cell->suivant->p, "Point");
                 cell = cell->suivant;
             }
         }
