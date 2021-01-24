@@ -8,7 +8,7 @@
 
 **Autheurs :** Hugo Bensbia ; Naomi Rousselle
 
-**Groupe :** MIN-4
+**Groupe :** MIN-4      
 
 # Que contient cette archive ?
 
@@ -31,7 +31,7 @@ Ce repertoire contient les programmes visant a tester les fonctions implementees
 
 Ce repertoire contient les fichiers interfaces (.h) des differents paquetages utilises pour le projet.
 
-## Repertoire "librairies"
+## Repertoire "lib"
 
 Ce repertoire contient les fichiers d'implementations (.c) des differents paquetages utilises pour le projet.
 
@@ -39,11 +39,11 @@ Ce repertoire contient les fichiers d'implementations (.c) des differents paquet
 
 ### format.md
 
-Specifie nos regles d'ecriture pour nos fonctions, structures, et autre indications notables pour comprendre notre syntax.
+Specifie nos regles d'ecriture pour nos fonctions, structures, et autre indications notables pour comprendre notre syntaxe.
 
 ### Makefile
 
-Sert a compiler les programmes selon des regles definiees. 
+Sert a compiler les programmes selon des regles definies. 
 Liste des commandes : 
 - *make* : Compile tous les executables.
 - *clean* : Supprime tous les fichiers *.o*
