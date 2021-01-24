@@ -25,10 +25,10 @@ CC = clang
 INCDIR = ./interfaces/
 
 # chemin d'acces aux librairies (binaires)
-LIBDIR = ./librairies/
+LIBDIR = ./lib/
 
 # chemin d'acces aux executables (binaires)
-EXEDIR = ./executables/
+EXEDIR = ./tests/
 
 # options pour l'edition des liens
 LDOPTS = -L$(LIBDIR) -lm
