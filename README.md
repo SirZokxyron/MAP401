@@ -1,17 +1,18 @@
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#       //    //      //      //////     //    //   ////////       ////   #
-#      ///  ///    //  //    //    //   //    //   //    //      // //    #
-#     // // //   //    //   //    //   ////////   //    //     //  //     #
-#    //    //   ////////   //////           //   //    //         //      #
-#   //    //   //    //   //               //   ////////         //       #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    #       //    //      //      //////     //    //   ////////       ////   #
+    #      ///  ///    //  //    //    //   //    //   //    //      // //    #
+    #     // // //   //    //   //    //   ////////   //    //     //  //     #
+    #    //    //   ////////   //////           //   //    //         //      #
+    #   //    //   //    //   //               //   ////////         //       #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 **Autheurs :** Hugo Bensbia ; Naomi Rousselle
+
 **Groupe :** MIN-4
 
 # Que contient cette archive ?
 
-    Les fichiers d'une projet logiciel visant a l'extraction des contours d'une image bitmap.
+Les fichiers d'une projet logiciel visant a l'extraction des contours d'une image bitmap.
 
 # Comment sont organises les fichiers ?
 
