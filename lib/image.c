@@ -154,8 +154,8 @@ Image lire_fichier_image(char *nom_f) {
 	I = creer_image(L, H);
 	
 	// Lecture des pixels du fichier - lecture caractere par caractere seuls les caracteres '0' (BLANC) ou '1' (NOIR) doivent etre pris en compte
-	x = 0;
-	y = 0;
+	x = 1;
+	y = 1;
 	Pixel pix;
 	char c;
 	
@@ -172,10 +172,10 @@ Image lire_fichier_image(char *nom_f) {
 
 			set_pixel_image(I, x, y, pix);
 			x++;
-			if (x >= L) {
-				x = 0;
+			if (x > L) {
+				x = 1;
 				y++;
-				if (y == H) {
+				if (y > H) {
 					break;
 				}
 			}
@@ -183,7 +183,7 @@ Image lire_fichier_image(char *nom_f) {
 	}
 	
 	// Verification que l'image soit bien remplie
-	if (y != H) {
+	if (y != H+1) {
 		ERREUR_FATALE("[Erreur]\tlire_fichier_image\tPas assez de caractere dans le fichier pbm.");
 	}
 
@@ -195,8 +195,8 @@ Image lire_fichier_image(char *nom_f) {
 
 /* Affichage de l'image I a l'ecran */
 void ecrire_image(Image I) {
-	for (int i = 0; i < hauteur_image(I); i++) {
-		for (int j = 0; j < largeur_image(I); j++) {
+	for (int i = 1; i <= hauteur_image(I); i++) {
+		for (int j = 1; j <= largeur_image(I); j++) {
 			switch (get_pixel_image(I,j,i)) {
 			case BLANC:
 				printf(".");

@@ -18,9 +18,9 @@ int main (int argc, char * argv[]) {
     ecrire_image(I);
 
     // Modification de l'image
-    set_pixel_image(I, 5, 4, NOIR);
-    set_pixel_image(I, 5, 5, NOIR);
-    set_pixel_image(I, 5, 6, NOIR);
+    set_pixel_image(I, 6, 5, NOIR);
+    set_pixel_image(I, 6, 6, NOIR);
+    set_pixel_image(I, 6, 7, NOIR);
 
     // Nouvel affichage de l'image
     printf("Image apres modification : \n");
