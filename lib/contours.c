@@ -4,8 +4,8 @@
 
     /* Renvoie le pixel de depart selon un algorithme de recherche des contours qui necessite un pixel noir sous-jacent a un pixel blanc */
     Point pos_depart (Image I) {
-        for (int i = 0; i < hauteur_image(I); i++) {
-            for (int j = 0; j < largeur_image(I); j++) {
+        for (int i = 1; i <= hauteur_image(I); i++) {
+            for (int j = 1; j <= largeur_image(I); j++) {
                 Pixel p_up = get_pixel_image(I,j,i-1);
                 Pixel p = get_pixel_image(I,j,i);
 
