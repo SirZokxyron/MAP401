@@ -32,5 +32,5 @@
             }
         }
         memoriser_pos(&r);
-        affiche_liste(r.memoire);
-    }
+        ecrire_contour(r.memoire);
+    } 

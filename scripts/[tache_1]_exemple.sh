@@ -1,16 +1,13 @@
 #!/bin/bash
 
 echo "---------------------------------------------"
-echo "    Review gestion erreurs de la tache 1     "
+echo "        Review exemple de la tache 1         "
 echo "---------------------------------------------"
 make test_image
 make clean
-for file in $(ls images/tache_1/[e*)
-do
 echo ""
 echo "---------------------------------------------"
-echo "      Execution de ./test_image $file        "
+echo "Execution de ./test_image images/tache_1/2.pbm"
 echo "---------------------------------------------"
-./test_image $file
-done
-make clear-
+./test_image images/tache_1/2.pbm
+make clear

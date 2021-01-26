@@ -1,16 +1,16 @@
 #!/bin/bash
 
 echo "---------------------------------------------"
-echo "    Review gestion erreurs de la tache 1     "
+echo "      Review cas de recherche contours       "
 echo "---------------------------------------------"
-make test_image
+make test_contours
 make clean
-for file in $(ls images/tache_1/[e*)
+for file in $(ls images/tache_3/*)
 do
 echo ""
 echo "---------------------------------------------"
-echo "      Execution de ./test_image $file        "
+echo "      Execution de ./test_contours $file        "
 echo "---------------------------------------------"
-./test_image $file
+./test_contours $file
 done
-make clear-
+make clear
