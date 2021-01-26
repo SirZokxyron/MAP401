@@ -16,6 +16,11 @@ Les fichiers d'un projet logiciel visant a l'extraction des contours d'une image
 
 # Comment sont organises les fichiers ?
 
+## Repertoire "build"
+
+Ce repertoire contient les fichier `.contours` crees par le programme `test_contours` de la tache 3.
+Il sert de zone de reception de ces fichiers.
+
 ## Repertoire "images"
 
 Ce repertoire contient les images utilisees par les differents programmes de tests.
