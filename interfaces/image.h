@@ -14,6 +14,7 @@
 
    /* Type Image */
    typedef struct Image_ {
+      string nom;
       UINT L,H; /* largeur et hauteur de l'image */
       Pixel* tab; /*  tableau de pixels */
       /* le pixel d'abscisse x et d'ordonnee y avec 1<=x<=L et 1<=y<=H 

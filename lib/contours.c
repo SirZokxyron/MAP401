@@ -32,14 +32,21 @@
             }
         }
         memoriser_pos(&r);
-        ecrire_contour(r.memoire);
-        // save_contour(r.memoire, "exemple.contours");
+        // ecrire_contour(r.memoire);
+        save_contour(r.memoire, I.nom);
     } 
 
     /* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours */
     void save_contour(liste L, char * nom)  {
-        
-        FILE *f = fopen(nom, "w");
+
+        string prefix = "build/";
+        string suffix = ".contours";
+        string temp = (string)malloc(1 + strlen(nom) + strlen(suffix));
+        sprintf(temp, "%s%s", nom, suffix);
+        string nom_f = (string)malloc(1 + strlen(prefix) + strlen(temp));
+        sprintf(nom_f, "%s%s", prefix, temp);
+
+        FILE *f = fopen(nom_f, "w");
         
         fprintf(f, "1\n\n");
         

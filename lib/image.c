@@ -153,6 +153,11 @@ Image lire_fichier_image(char *nom_f) {
 	// Creation de l'image I de dimensions L x H
 	I = creer_image(L, H);
 
+	// Ajout du nom a l'image
+	nom_f[strlen(nom_f) - 4] = '\0';
+	I.nom = (string)malloc(1 + strlen(nom_f+7));
+	strcpy(I.nom, nom_f+7);
+
 	// Lecture des pixels du fichier - lecture caractere par caractere seuls les caracteres '0' (BLANC) ou '1' (NOIR) doivent etre pris en compte
 	x = 1;
 	y = 1;
