@@ -33,4 +33,23 @@
         }
         memoriser_pos(&r);
         ecrire_contour(r.memoire);
+        // save_contour(r.memoire, "exemple.contours");
     } 
+
+    /* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours */
+    void save_contour(liste L, char * nom)  {
+        
+        FILE *f = fopen(nom, "w");
+        
+        fprintf(f, "1\n\n");
+        
+        int tailleL = L.taille;
+        fprintf(f, "%d\n", tailleL);
+        cellule * cell = L.tete;
+        while (cell) {
+            fprintf(f, " %.1lf %.1lf\n", cell->p.x, cell->p.y);
+            cell = cell->suivant;
+        }
+
+        fclose(f);
+    }

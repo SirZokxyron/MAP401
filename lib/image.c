@@ -152,7 +152,7 @@ Image lire_fichier_image(char *nom_f) {
 	
 	// Creation de l'image I de dimensions L x H
 	I = creer_image(L, H);
-	
+
 	// Lecture des pixels du fichier - lecture caractere par caractere seuls les caracteres '0' (BLANC) ou '1' (NOIR) doivent etre pris en compte
 	x = 1;
 	y = 1;

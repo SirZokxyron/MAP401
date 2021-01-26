@@ -4,6 +4,7 @@
 #include "../interfaces/geometrie2D.h"
 #include "../interfaces/image.h"
 #include "../interfaces/robot.h"
+#include "../interfaces/liste.h"
 
 /* Fonctions pour determiner le contour d'une image */
 
@@ -12,5 +13,8 @@
 
     /* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours */
     void determiner_contour(Image I);
+
+    /* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours */
+    void save_contour(liste L, char * nom);
 
 #endif

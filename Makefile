@@ -87,7 +87,7 @@ test_image.o : $(EXEDIR)test_image.c $(INCDIR)image.h
 geometrie2D.o : $(LIBDIR)geometrie2D.c $(INCDIR)geometrie2D.h $(INCDIR)types_macros.h
 test_geometrie.o : $(EXEDIR)test_geometrie.c $(INCDIR)geometrie2D.h 
 
-contours.o : $(LIBDIR)contours.c $(INCDIR)contours.h $(INCDIR)geometrie2D.h $(INCDIR)image.h $(INCDIR)robot.h $(INCDIR)types_macros.h
+contours.o : $(LIBDIR)contours.c $(INCDIR)contours.h $(INCDIR)geometrie2D.h $(INCDIR)liste.h $(INCDIR)image.h $(INCDIR)robot.h $(INCDIR)types_macros.h
 liste.o : $(LIBDIR)liste.c $(INCDIR)liste.h $(INCDIR)geometrie2D.h $(INCDIR)types_macros.h
 robot.o : $(LIBDIR)robot.c $(INCDIR)robot.h $(INCDIR)contours.h $(INCDIR)types_macros.h $(INCDIR)liste.h
 test_contours.o : $(EXEDIR)test_contours.c $(INCDIR)robot.h $(INCDIR)contours.h

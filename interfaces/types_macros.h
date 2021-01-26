@@ -13,6 +13,9 @@ typedef char bool;
 #define false 0
 #define true  1
 
+/* type string */
+typedef char * string;
+
 /* type entier positif */
 typedef unsigned int UINT;
 
