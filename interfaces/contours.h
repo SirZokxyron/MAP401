@@ -11,6 +11,9 @@
     /* Renvoie le pixel de depart selon un algorithme de recherche des contours qui necessite un pixel noir sous-jacent a un pixel blanc */
     Point pos_depart(Image I);
 
+    /* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image */
+    string get_fichier_contours(string nom);
+
     /* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours */
     void determiner_contour(Image I);
 

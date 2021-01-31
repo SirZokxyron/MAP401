@@ -18,14 +18,15 @@ Les fichiers d'un projet logiciel visant a l'extraction des contours d'une image
 
 ## Repertoire "build"
 
-Ce repertoire contient les fichier `.contours` crees par le programme `test_contours` de la tache 3.
-Il sert de zone de reception de ces fichiers.
+Ce repertoire est organise en sous-repertoires : un pour chaque tache. 
+
+Les fichiers resultants de nos tests sont automatiquement ranges dans les dossiers correspondants.
 
 ## Repertoire "images"
 
 Ce repertoire contient les images utilisees par les differents programmes de tests.
+Il est organise en sous-repertoires : un pour chaque tache. 
 
-Les images ayant le pre-fixe *[valide]* sont syntaxiquement correcte.
 Les images ayant le pre-fixe *[erreur]* sont volontairement syntaxiquement fausses pour mettre en avant la gestion d'une erreur particuliere par un programme de test. L'erreur est indiquee dans le titre.
 
 ## Repertoire "tests"
@@ -43,7 +44,10 @@ Ce repertoire contient les fichiers d'implementations (.c) des differents paquet
 ## Repertoire "scripts"
 
 Ce repertoire contient des scripts qui compilent et effectuent automatiquement differents tests pour chacune des taches.
-Commande : `./scripts/[tache_x]_nom.sh`
+
+Commandes executables : 
+- `./scripts/[tache_x]_nom.sh`
+- `./scripts/[utile]_nom.sh`
 
 ## Repertoire du projet
 

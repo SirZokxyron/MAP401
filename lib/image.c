@@ -19,7 +19,7 @@ Image creer_image(UINT L, UINT H) {
 	I.L = L;
 	I.H = H;
 	
-	// Alloctaion dynamique d'un tableau de L*H Pixel
+	// Alloctaion dynamique d'un tableau de L* H Pixel
 	I.tab = (Pixel *)malloc(sizeof(Pixel)*L*H);
 	
 	// Test si le tableau a ete correctement alloue

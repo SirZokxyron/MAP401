@@ -18,6 +18,22 @@
         ERREUR_FATALE("Tous les pixels sont blancs.");
     }
 
+    /* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image */
+    string get_fichier_contours(string nom) {
+        
+        //> Ajout du suffix ".contours" a la fin du nom
+        string suffix = ".contours";
+        string temp = (string)malloc(1 + strlen(nom) + strlen(suffix));
+        sprintf(temp, "%s%s", nom, suffix);
+
+        //> Ajout du prefix "build/" au debut du nom
+        string prefix = "build/";
+        string nom_f = (string)malloc(1 + strlen(prefix) + strlen(temp));
+        sprintf(nom_f, "%s%s", prefix, temp);
+
+        return nom_f;
+    }
+
     /* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours */
     void determiner_contour(Image I) {
         Robot r;
@@ -32,21 +48,14 @@
             }
         }
         memoriser_pos(&r);
-        // ecrire_contour(r.memoire);
-        save_contour(r.memoire, I.nom);
-    } 
+        //> ecrire_contour(r.memoire);
+        save_contour(r.memoire, get_fichier_contours(I.nom)); 
+    }
 
     /* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours */
     void save_contour(liste L, char * nom)  {
 
-        string prefix = "build/";
-        string suffix = ".contours";
-        string temp = (string)malloc(1 + strlen(nom) + strlen(suffix));
-        sprintf(temp, "%s%s", nom, suffix);
-        string nom_f = (string)malloc(1 + strlen(prefix) + strlen(temp));
-        sprintf(nom_f, "%s%s", prefix, temp);
-
-        FILE *f = fopen(nom_f, "w");
+        FILE *f = fopen(nom, "w");
         
         fprintf(f, "1\n\n");
         

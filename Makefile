@@ -40,7 +40,7 @@ INCLUDEOPTS = -I$(INCDIR)
 COMPILOPTS = -g -Wall $(INCLUDEOPTS)
 
 # liste des executables
-EXECUTABLES = test_image test_geometrie test_contours
+EXECUTABLES = test_image test_geometrie test_contours test_eps
 
 
 #############################################################################
@@ -92,6 +92,9 @@ liste.o : $(LIBDIR)liste.c $(INCDIR)liste.h $(INCDIR)geometrie2D.h $(INCDIR)type
 robot.o : $(LIBDIR)robot.c $(INCDIR)robot.h $(INCDIR)contours.h $(INCDIR)types_macros.h $(INCDIR)liste.h
 test_contours.o : $(EXEDIR)test_contours.c $(INCDIR)robot.h $(INCDIR)contours.h
 
+eps.o : $(LIBDIR)eps.c $(INCDIR)eps.h $(INCDIR)robot.h $(INCDIR)contours.h $(INCDIR)types_macros.h $(INCDIR)liste.h
+test_eps.o : $(EXEDIR)test_eps.c $(INCDIR)eps.h $(INCDIR)robot.h
+
 ########################################################
 # regles explicites de creation des executables
 
@@ -100,6 +103,8 @@ test_image : test_image.o image.o
 test_geometrie : test_geometrie.o geometrie2D.o
 
 test_contours : test_contours.o contours.o robot.o geometrie2D.o image.o liste.o
+
+test_eps : test_eps.o eps.o robot.o geometrie2D.o image.o liste.o contours.o
 
 # regle pour "nettoyer" le repertoire
 clean:
