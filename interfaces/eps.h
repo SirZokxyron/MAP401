@@ -3,15 +3,6 @@
 
 #include "../interfaces/robot.h"
 
-/*
-header : 
-    %!PS-Adobe-3.0 EPSF-3.0
-bounding box : 
-    %%BoundingBox : xmin ymin xmax ymax
-instructions on how to draw that crap
-showpage
-*/ 
-
 /* Modifie les coordonnees d'un point pour le format .eps */
 Point repare_point(Image I, Point A);
 
