@@ -24,7 +24,7 @@ int main (int argc, char * argv[]) {
     debug_contour(I);
 
     //> Affichage du format .eps du contours
-    creer_eps(I, atoi(argv[2]));
+    creer_eps(I, atoi(argv[2]));  
 
     return 0;
 }

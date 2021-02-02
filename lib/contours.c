@@ -70,20 +70,28 @@
     //* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours
     void determiner_contour(Image I) {
 
+        //> On supprime un potentiel precedent fichier .contours
+        string commande = (string)malloc(128);
+        sprintf(commande, "rm %s 2> /dev/null", get_fichier_contours(I.nom));
+        system(commande);
+
         //> Creation du robot qui determine le contour
         Robot r;
 
         //> Tant que le masque contient au moins un pixel noir
         while (!est_blanche(I)) {
             
+            //? Affichage du masque de l'image a l'ecran
+            ecrire_masque(I); printf("\n");        
+
             //> Initialisation du robot avec les bonnes coordonnees de depart et orientation Est
             Point pos_init = init_robot(&r, I);
             
             //> Boucle tant que le contour n'est pas termine
             bool boucle = true;
             while (boucle) {
-                //> On enleve les pixels par lesquelles on passe du masque
-                set_pixel_masque(I, r.pos.x + 1, r.pos.y + 1, BLANC);
+                //> On enleve les pixels par lesquelles on passe du masque si on est oriente vers l'Est
+                if (get_orientation(r) == Est) set_pixel_masque(I, r.pos.x + 1, r.pos.y + 1, BLANC);
                 //> Stockage de la position actuel dans la memoire
                 memoriser_pos(&r);
                 avancer(&r); 
@@ -97,13 +105,8 @@
             //> On sauvegarde le premier/dernier point une nouvelle fois
             memoriser_pos(&r);
             
-            //> On supprime un potentiel precedent fichier .contours
-            string commande = (string)malloc(128);
-            sprintf(commande, "rm %s 2> /dev/null", get_fichier_contours(I.nom));
-            system(commande);
-            
             //> On sauvegarde la memoire du robot dans une fichier .contours
-            save_contour(r.memoire, get_fichier_contours(I.nom)); 
+            save_contour(r.memoire, get_fichier_contours(I.nom));
         }
     }
 
@@ -122,7 +125,7 @@
             int nb_contours;
             fscanf(f, "%d", &nb_contours);
             nb_contours++;
-            fclose(f);
+            fclose(f);     
 
             f = fopen(nom, "r+");
             fseek(f, 0, SEEK_SET);
