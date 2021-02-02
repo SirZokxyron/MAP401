@@ -13,7 +13,6 @@
 # (une commande commancant par @ n'est pas affichee a l'ecran)
 #############################################################################
 
-
 #############################################################################
 # definition des variables locales
 #############################################################################
@@ -109,7 +108,9 @@ test_eps : test_eps.o eps.o robot.o geometrie2D.o image.o liste.o contours.o
 
 test_multiples_contours : test_multiples_contours.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
 
+########################################################
 # regle pour "nettoyer" le repertoire
+
 clean:
 	@echo ""
 	@echo "---------------------------------------------"
@@ -117,6 +118,7 @@ clean:
 	@echo "---------------------------------------------"
 	rm -fR *.o
 
+########################################################
 # regle pour supprimer les executables
 
 clear:
