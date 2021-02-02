@@ -6,30 +6,31 @@
 
 int main (int argc, char * argv[]) {
 
+    //> Verification du nombre d'arguments
     if (argc != 2) {
-        ERREUR_FATALE("[Erreur]\ttest_image/main\tNombre d'argument incorrect, 1 argument attendu.");
+        ERREUR_FATALE("[Erreur]\ttest_image/main\tNombre d'argument incorrect, une image attendue.");
     }
 
-    // Lecture de l'image passee en argument du programme
+    //> Lecture de l'image passee en argument du programme
     Image I = lire_fichier_image(argv[1]);
     
-    // Affichage de l'image
+    //> Affichage de l'image
     printf("Image avant modification : \n");
     ecrire_image(I);
 
-    // Modification de l'image
+    //> Modification de l'image
     set_pixel_image(I, 6, 5, NOIR);
     set_pixel_image(I, 6, 6, NOIR);
     set_pixel_image(I, 6, 7, NOIR);
 
-    // Nouvel affichage de l'image
+    //> Nouvel affichage de l'image
     printf("Image apres modification : \n");
     ecrire_image(I); 
     
-    // Suppression de l-image
+    //> Suppression de l-image
     supprimer_image(&I);
 
-    // Affichage de l'image pour verifier la bonne suppression
+    //> Affichage de l'image pour verifier la bonne suppression
     ecrire_image(I); 
 
     return 0;

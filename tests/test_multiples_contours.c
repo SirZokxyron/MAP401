@@ -5,7 +5,7 @@ int main (int argc, char * argv[]) {
     
     //> Verification du nombre d'arguments
     if (argc != 3) {
-        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, 2 arguments attendus.");
+        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image et une mode (1-3) attendus.");
     }
 
     //> Recuperation de l'image
@@ -19,6 +19,8 @@ int main (int argc, char * argv[]) {
 
     //> Calcul des multiples contours
     determiner_contour(I);
+    
+    //> Affichage du nombre de contours et segments a l'ecran
     debug_contour(I);
 
     //> Affichage du format .eps du contours

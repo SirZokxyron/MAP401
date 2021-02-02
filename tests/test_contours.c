@@ -4,7 +4,7 @@ int main(int argc, char * argv[]) {
 
    //> Verification du nombre d'arguments
    if (argc != 2) {
-      ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, 1 argument attendu.");
+      ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image attendue.");
    }
 
    //> Chargement de notre image au format PBM
