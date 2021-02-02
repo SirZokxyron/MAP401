@@ -8,19 +8,19 @@
 
 /* Fonctions pour determiner le contour d'une image */
 
-    /* Renvoie le pixel de depart selon un algorithme de recherche des contours qui necessite un pixel noir sous-jacent a un pixel blanc */
+    //* Renvoie le pixel de depart, le premier pixel noir trouve dans l'image masque
     Point pos_depart(Image I);
 
-    /* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image */
+    //* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image
     string get_fichier_contours(string nom);
 
-    /* Fonction debug */
+    //* Affiche a l'ecran le nombre de contours et de segments totaux
     void debug_contour(Image I);
 
-    /* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours */
+    //* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours
     void determiner_contour(Image I);
 
-    /* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours */
+    //* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours
     void save_contour(liste L, char * nom);
 
 #endif
