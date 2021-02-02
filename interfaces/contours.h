@@ -14,6 +14,9 @@
     /* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image */
     string get_fichier_contours(string nom);
 
+    /* Fonction debug */
+    void debug_contour(Image I);
+
     /* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours */
     void determiner_contour(Image I);
 

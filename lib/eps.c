@@ -124,12 +124,12 @@ void creer_eps(Image I, int mode) {
     int nb_contours;
     fscanf(fichierContour, "%d", &nb_contours);
     for (int contours_i = 0; contours_i < nb_contours; contours_i++) {
-        if (mode != 2) fprintf(fichierEps, "%s", nouvel_objet());
+        if (mode == 1) fprintf(fichierEps, "%s", nouvel_objet());
         
         int nb_points;
         fscanf(fichierContour, "%d", &nb_points);
         for (int point_i = 0; point_i < nb_points; point_i++) {
-            
+
             double x = 0.0; 
             double y = 0.0;
             fscanf(fichierContour, "%lf %lf", &x, &y);
@@ -154,9 +154,6 @@ void creer_eps(Image I, int mode) {
        
         switch (mode) {
             case 3:
-                fprintf(fichierEps, "%s", finir_objet());
-                fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
-                fprintf(fichierEps, "%s", remplir());
                 break;
             case 2:
                 fprintf(fichierEps, "%s", creer_point(prev, 0.2));
@@ -171,6 +168,10 @@ void creer_eps(Image I, int mode) {
         flag_start = false;
     } 
 
+    if (mode == 3) { 
+        fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
+        fprintf(fichierEps, "%s", remplir());
+    }
     fprintf(fichierEps, "%s", affiche_eps());
     fclose(fichierEps);
     fclose(fichierContour);

@@ -21,7 +21,8 @@ Image creer_image(UINT L, UINT H) {
 	
 	// Alloctaion dynamique d'un tableau de L* H Pixel
 	I.tab = (Pixel *)malloc(sizeof(Pixel)*L*H);
-	
+	I.masque = (Pixel *)malloc(sizeof(Pixel)*L*H);
+
 	// Test si le tableau a ete correctement alloue
 	if (I.tab == (Pixel *)NULL) {
 		ERREUR_FATALE("[Erreur]\tcreer_image\tImpossible de creer une image.");
@@ -29,13 +30,15 @@ Image creer_image(UINT L, UINT H) {
 	
 	// remplir le tableau avec des pixels blancs
 	for (i=0; i<L*H; i++) I.tab[i] = BLANC;
-		
+	for (i=0; i<L*H; i++) I.masque[i] = BLANC;
+
 	return I;
 }
 
 /* Suppression de l'image I = *p_I */
 void supprimer_image(Image *p_I) {
 	free(p_I->tab);
+	free(p_I->masque);
 	p_I->L = 0;
 	p_I->H = 0;
 }
@@ -46,10 +49,22 @@ Pixel get_pixel_image(Image I, int x, int y) {
 	return I.tab[INDICE_PIXEL(I,x,y)];
 }
 
+/* Renvoie la valeur du pixel (x,y) du masque de l'image I */
+Pixel get_pixel_masque(Image I, int x, int y) {
+	if (x<1 || x>I.L || y<1 || y>I.H) return BLANC;
+	return I.masque[INDICE_PIXEL(I,x,y)];
+}
+
 /* Change la valeur du pixel (x,y) de l'image I avec la valeur v : si (x,y) est hors de l'image, la fonction ne fait rien */
 void set_pixel_image(Image I, int x, int y, Pixel v) {
 	if (x<1 || x>I.L || y<1 || y>I.H) return;
 	I.tab[INDICE_PIXEL(I,x,y)] = v;
+}
+
+/* Change la valeur du pixel (x,y) du masque de l'image I avec la valeur v */
+void set_pixel_masque(Image I, int x, int y, Pixel v) {
+	if (x<1 || x>I.L || y<1 || y>I.H) return;
+	I.masque[INDICE_PIXEL(I,x,y)] = v;
 }
 
 /* Renvoie la largeur de l'image I */
@@ -102,7 +117,7 @@ void entete_fichier_pbm(FILE *f) {
 		// Test de la fin de fichier
 		if (feof(f)) {
 			ERREUR_FATALE("[Erreur]\tentete_fichier_pbm\tFin fichier inattendue.");
-		} //how so
+		} 
 		
 		// Lecture d'un caractere et test par rapport a '#'
 		char c;
@@ -161,6 +176,7 @@ Image lire_fichier_image(char *nom_f) {
 	// Lecture des pixels du fichier - lecture caractere par caractere seuls les caracteres '0' (BLANC) ou '1' (NOIR) doivent etre pris en compte
 	x = 1;
 	y = 1;
+	Pixel masque;
 	Pixel pix;
 	char c;
 	
@@ -169,12 +185,15 @@ Image lire_fichier_image(char *nom_f) {
 
 		if (c == '0' || c == '1') {
 
+			masque = BLANC;
 			if (c == '0') {
 				pix = BLANC;
 			} else {
+				if (get_pixel_image(I, x, y - 1) == BLANC) masque = NOIR;
 				pix = NOIR;
 			}
 
+			set_pixel_masque(I, x, y, masque);
 			set_pixel_image(I, x, y, pix);
 			x++;
 			if (x > L) {
@@ -206,7 +225,6 @@ void ecrire_image(Image I) {
 			case BLANC:
 				printf(".");
 				break;
-			
 			case NOIR:
 				printf("x");
 				break;
@@ -217,4 +235,34 @@ void ecrire_image(Image I) {
 		}
 		printf("\n");
 	}
+}
+
+/* AFficher le masque de l'image I a l'ecran */
+void ecrire_masque(Image I) {
+	for (int i = 1; i <= hauteur_image(I); i++) {
+		for (int j = 1; j <= largeur_image(I); j++) {
+			switch (get_pixel_masque(I,j,i)) {
+			case BLANC:
+				printf(".");
+				break;
+			case NOIR:
+				printf("x");
+				break;
+			default:
+				ERREUR_FATALE("[Erreur]\tecrire_masque\tPixel ayant une valeur autre que 0 ou 1.");
+				break;
+			}
+		}
+		printf("\n");
+	}
+}
+
+/* Renvoie true si l'image masque est blanche, false sinon */
+bool est_blanche(Image I) {
+	for (int i = 1; i <= hauteur_image(I); i++) {
+		for (int j = 1; j <= largeur_image(I); j++) {
+			if(get_pixel_masque(I,j,i) == NOIR) return false;
+		}
+	}
+	return true;
 }
