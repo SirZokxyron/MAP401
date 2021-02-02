@@ -97,7 +97,12 @@
             //> On sauvegarde le premier/dernier point une nouvelle fois
             memoriser_pos(&r);
             
-            //> On sauvegarde la memoire du robot dans une fichier .contour
+            //> On supprime un potentiel precedent fichier .contours
+            string commande = (string)malloc(128);
+            sprintf(commande, "rm %s", get_fichier_contours(I.nom));
+            system(commande);
+            
+            //> On sauvegarde la memoire du robot dans une fichier .contours
             save_contour(r.memoire, get_fichier_contours(I.nom)); 
         }
     }
@@ -110,7 +115,7 @@
 
         //> Si f == NULL, alors on cree le fichier contenant le premier contour
         if (!f) {
-            fclose(f);
+            //! fclose(f);          //! Ne pas fclose un pointeur vers un fichier NULL
             f = fopen(nom, "w");
             fprintf(f, "1\n\n");
         } else {
