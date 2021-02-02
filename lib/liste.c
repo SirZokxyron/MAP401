@@ -2,7 +2,7 @@
 
 /* Fonctions pour gerer la structure liste chainee */
 
-    /* Initialise une cellule avec le point donne */
+    //* Initialise une cellule avec le point donne
     cellule * init_cellule(Point p) {
         cellule * cell = (cellule *)malloc(sizeof(cellule));
         cell->p = p;
@@ -10,14 +10,14 @@
         return cell; 
     }
 
-    /* Initialise une liste vide */
+    //* Initialise une liste vide
     void init_liste(liste * L) {
         L->taille = 0;
         L->tete = NULL;
         L->queue = NULL;
     }
 
-    /* Ajoute la cellule en bout de liste donne */
+    //* Ajoute la cellule en bout de liste donne
     void ajout_en_queue(liste * L, cellule * cell) {
         if (!L->taille) {
             L->tete = cell;
@@ -29,7 +29,7 @@
         L->taille++;
     }
 
-    /* Supprime la liste chainee L */
+    //* Supprime la liste chainee L
     void supprimer_liste(liste * L) {
         cellule * cell = L->tete;
         while (cell) {
@@ -40,7 +40,7 @@
         init_liste(L);
     }
 
-    /* Concatene L2 a la suite de L1, renvoie L1 modifiee */
+    //* Concatene L2 a la suite de L1, renvoie L1 modifiee
     liste concat_liste(liste L1, liste L2) {
         if (L1.taille == 0) return L2; 
 		if (L2.taille == 0) return L1;
@@ -51,7 +51,7 @@
         return L1;
     }
 
-    /* Convertit une liste chainee en un tableau de point */
+    //* Convertit une liste chainee en un tableau de point
     tableau liste_V_tableau(liste L) {
         tableau T;
         T.taille = L.taille;
@@ -68,7 +68,7 @@
         return T;
     }
 
-    /* Affiche le contour d'une image a l'ecran */
+    //* Affiche le contour d'une image a l'ecran
     void ecrire_contour(liste L) {
         tableau T = liste_V_tableau(L);
         int k;
