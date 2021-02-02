@@ -99,7 +99,7 @@
             
             //> On supprime un potentiel precedent fichier .contours
             string commande = (string)malloc(128);
-            sprintf(commande, "rm %s", get_fichier_contours(I.nom));
+            sprintf(commande, "rm %s 2> /dev/null", get_fichier_contours(I.nom));
             system(commande);
             
             //> On sauvegarde la memoire du robot dans une fichier .contours
