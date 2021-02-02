@@ -81,8 +81,8 @@
         //> Tant que le masque contient au moins un pixel noir
         while (!est_blanche(I)) {
             
-            //? Affichage du masque de l'image a l'ecran
-            ecrire_masque(I); printf("\n");        
+            //? Affichage du masque de l'image a l'ecran pour du debugging
+            //? ecrire_masque(I); printf("\n");        
 
             //> Initialisation du robot avec les bonnes coordonnees de depart et orientation Est
             Point pos_init = init_robot(&r, I);
