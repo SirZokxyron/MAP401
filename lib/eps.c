@@ -9,7 +9,7 @@ Point repare_point(Image I, Point A) {
 
 //* Renvoie la commande .eps pour le header du fichier
 string header() {
-    string commande = "%%!PS-Adobe-3.0 EPSF-3.0\n";
+    string commande = "%!PS-Adobe-3.0 EPSF-3.0\n";
     return commande;
 }
 
@@ -128,7 +128,6 @@ void creer_eps(Image I, int mode) {
     fscanf(fichierContour, "%d", &nb_contours);
     //> On itere sur chaque contour
     for (int contours_i = 0; contours_i < nb_contours; contours_i++) {
-        
         //? Mode 1 : On cree un nouvel objet, pour terminer proprement la jonction entre le premier et dernier segment
         if (mode == 1) fprintf(fichierEps, "%s", nouvel_objet());
         

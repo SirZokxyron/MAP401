@@ -120,16 +120,13 @@
         if (!f) {
             //! fclose(f);          //! Ne pas fclose un pointeur vers un fichier NULL
             f = fopen(nom, "w");
-            fprintf(f, "1\n\n");
+            fprintf(f, "1                 \n\n");
         } else {
             int nb_contours;
             fscanf(f, "%d", &nb_contours);
             nb_contours++;
-            fclose(f);     
-
-            f = fopen(nom, "r+");
             fseek(f, 0, SEEK_SET);
-            fprintf(f, "%d\n", nb_contours);
+            fprintf(f, "%d", nb_contours);
             
             fseek(f, 0, SEEK_END);
         }
