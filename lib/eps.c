@@ -9,7 +9,7 @@ Point repare_point(Image I, Point A) {
 
 //* Renvoie la commande .eps pour le header du fichier
 string header() {
-    string commande = "%!PS-Adobe-3.0 EPSF-3.0\n";
+    string commande = "%%!PS-Adobe-3.0 EPSF-3.0\n";
     return commande;
 }
 
