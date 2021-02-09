@@ -39,7 +39,7 @@ INCLUDEOPTS = -I$(INCDIR)
 COMPILOPTS = -g -Wall $(INCLUDEOPTS)
 
 # liste des executables
-EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours
+EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_simplification
 
 #############################################################################
 # definition des regles
@@ -95,6 +95,10 @@ test_eps.o : $(EXEDIR)test_eps.c $(INCDIR)eps.h $(INCDIR)robot.h
 
 test_multiples_contours.o : $(EXEDIR)test_multiples_contours.c $(INCDIR)robot.h $(INCDIR)contours.h
 
+simplification.o : $(LIBDIR)simplification.c $(INCDIR)simplification.h $(INCDIR)eps.h $(INCDIR)robot.h $(INCDIR)contours.h $(INCDIR)types_macros.h $(INCDIR)liste.h
+
+test_simplification.o : $(EXEDIR)test_simplification.c simplification.o
+
 ########################################################
 # regles explicites de creation des executables
 
@@ -102,11 +106,13 @@ test_image : test_image.o image.o
 
 test_geometrie : test_geometrie.o geometrie2D.o
 
-test_contours : test_contours.o contours.o robot.o geometrie2D.o image.o liste.o
+test_contours : test_contours.o contours.o robot.o geometrie2D.o image.o liste.o simplification.o
 
-test_eps : test_eps.o eps.o robot.o geometrie2D.o image.o liste.o contours.o
+test_eps : test_eps.o eps.o robot.o geometrie2D.o image.o liste.o contours.o simplification.o
 
-test_multiples_contours : test_multiples_contours.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
+test_multiples_contours : test_multiples_contours.o eps.o contours.o robot.o geometrie2D.o image.o liste.o simplification.o
+
+test_simplification : test_simplification.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
 
 ########################################################
 # regle pour "nettoyer" le repertoire

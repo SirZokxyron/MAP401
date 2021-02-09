@@ -58,6 +58,15 @@
     //* Cree le vecteur issu de la soustraction de deux autre vecteurs : V1 - V2
     Vecteur sub_vect(Vecteur V1, Vecteur V2);
 
+    //* Renvoie la norme du vecteur V1 
+    double norme_vect(Vecteur V1);
+
+    //* Renvoie le produit scalaire de V1 et V2
+    double prod_scal_vect(Vecteur V1, Vecteur V2);
+
+    //* Renvoie la distance entre le segment [P1, P2] et le point P3
+    double dist_vect_point(Point P1, Point P2, Point P3);
+
     //* Affiche les coordonnees d'un vecteur derriere un nom specifie
     void affiche_vecteur(Vecteur V, char *nom);
 

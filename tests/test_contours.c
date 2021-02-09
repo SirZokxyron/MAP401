@@ -11,7 +11,7 @@ int main(int argc, char * argv[]) {
    Image I = lire_fichier_image(argv[1]);
 
    //> Recherche du point de depart pour determiner le contour
-   determiner_contour(I);
+   determiner_contour(I, 0);
 
    return 0;
 }

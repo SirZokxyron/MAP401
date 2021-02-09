@@ -1,10 +1,11 @@
+#include "../interfaces/simplification.h"
 #include "../interfaces/eps.h"
 
 int main (int argc, char * argv[]) {
     
     //> Verification du nombre d'arguments
-    if (argc != 3) {
-        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image et un mode (1-3) attendus.");
+    if (argc != 4) {
+        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-1) attendus.");
     }
 
     //> Recuperation de l'image
@@ -17,7 +18,7 @@ int main (int argc, char * argv[]) {
     //? ecrire_masque(I); printf("\n");
 
     //> Calcul des multiples contours
-    determiner_contour(I, 0);
+    determiner_contour(I, atoi(argv[3]));
     
     //> Affichage du nombre de contours et segments a l'ecran
     debug_contour(I);

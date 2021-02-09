@@ -61,6 +61,40 @@
         return add_vect(V1, scal_vect(-1, V2));
     }
 
+    //* Renvoie la norme du vecteur V1 
+    double norme_vect(Vecteur V1) {
+        return sqrt(pow(V1.x, 2) + pow(V1.y, 2));
+    }
+
+    //* Renvoie le produit scalaire de V1 et V2
+    double prod_scal_vect(Vecteur V1, Vecteur V2) {
+        return ((V1.x * V2.x) + (V1.y * V2.y));
+    }
+
+    //* Renvoie la distance entre le segment [P1, P2] et le point P3
+    double dist_vect_point(Point A, Point B, Point P) {
+    
+        double norme = norme_vect(vect_bipoint(A, B));
+        
+        //> Cas A == B
+        if (norme == 0.0) {
+            return (norme_vect(vect_bipoint(A, P)));
+        }
+
+        Vecteur AP = vect_bipoint(A, P);
+        Vecteur AB = vect_bipoint(A, B);
+        //> Cas A != B
+        double lambda = prod_scal_vect(AP, AB) / prod_scal_vect(AB, AB);
+        if (lambda < 0) {
+            return norme_vect(AP);
+        } else if (lambda > 1) {
+            return norme_vect(vect_bipoint(B, P));
+        } else {
+            Point Q = add_point(A, scal_point(lambda, sub_point(B, A)));
+            return norme_vect(vect_bipoint(Q, P));
+        }
+    }
+
     //* Affiche les coordonnees d'un vecteur derriere un nom specifie
     void affiche_vecteur(Vecteur V, char *nom) { 
         printf("%s : (%lf, %lf)\n", nom, V.x, V.y);

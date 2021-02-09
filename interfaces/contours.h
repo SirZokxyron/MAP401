@@ -18,7 +18,7 @@
     void debug_contour(Image I);
 
     //* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours
-    void determiner_contour(Image I);
+    void determiner_contour(Image I, int simplification);
 
     //* Sauvegarde un contour donne sous forme de liste de point dans un fichier .contours
     void save_contour(liste L, char * nom);

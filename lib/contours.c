@@ -1,4 +1,5 @@
 #include "../interfaces/contours.h"
+#include "../interfaces/simplification.h"
 
 /* Fonctions pour determiner le contour d'une image */
 
@@ -68,7 +69,7 @@
     }
 
     //* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours
-    void determiner_contour(Image I) {
+    void determiner_contour(Image I, int simplification) {
 
         //> On supprime un potentiel precedent fichier .contours
         string commande = (string)malloc(128);
@@ -109,8 +110,22 @@
                 //> On sauvegarde le premier/dernier point une nouvelle fois
                 memoriser_pos(&r);
                 
+                double d;
+                liste L;
+                init_liste(&L);
+                //> Passage par une simplification si argument correspondant
+                switch (simplification) {
+                    case 1:
+                        printf("Distance seuil : "); scanf("%lf%*c", &d); printf("\n");
+                        L = simplification_douglas_peucker(r.memoire, 0, r.memoire.taille - 1, d);
+                        break;
+                    default:
+                        L = r.memoire;
+                        break;
+                }
+
                 //> On sauvegarde la memoire du robot dans une fichier .contours
-                save_contour(r.memoire, get_fichier_contours(I.nom));
+                save_contour(L, get_fichier_contours(I.nom));
             }
         }
     }
