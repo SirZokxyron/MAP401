@@ -19,7 +19,7 @@
 /* Fonctions pour gerer le robot */
 
     //* Met la position du robot au point (x, y) trouve par la fonction pos_depart et l'orientation EST
-    Point init_robot(Robot * r, Image I);
+    Point init_robot(Robot * r, Point Depart);
 
     //* Renvoie l'orientation du robot
     Orientation get_orientation(Robot r);

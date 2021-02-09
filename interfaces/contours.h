@@ -8,8 +8,8 @@
 
 /* Fonctions pour determiner le contour d'une image */
 
-    //* Renvoie le pixel de depart, le premier pixel noir trouve dans l'image masque
-    Point pos_depart(Image I);
+    //? Renvoie le pixel de depart, le premier pixel noir trouve dans l'image masque
+    /* Point pos_depart(Image I); */
 
     //* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image
     string get_fichier_contours(string nom);

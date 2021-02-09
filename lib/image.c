@@ -255,13 +255,3 @@ void ecrire_masque(Image I) {
 		printf("\n");
 	}
 }
-
-//* Renvoie true si l'image masque est blanche, false sinon
-bool est_blanche(Image I) {
-	for (int i = 1; i <= hauteur_image(I); i++) {
-		for (int j = 1; j <= largeur_image(I); j++) {
-			if(get_pixel_masque(I,j,i) == NOIR) return false;
-		}
-	}
-	return true;
-}

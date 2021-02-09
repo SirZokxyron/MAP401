@@ -2,8 +2,8 @@
 
 /* Fonctions pour determiner le contour d'une image */
 
-    //* Renvoie le pixel de depart, le premier pixel noir trouve dans l'image masque
-    Point pos_depart (Image I) {
+    //? [ANCIENNE] Renvoie le pixel de depart, le premier pixel noir trouve dans l'image masque
+    /* Point pos_depart (Image I) {
         for (int i = 1; i <= hauteur_image(I); i++) {
             for (int j = 1; j <= largeur_image(I); j++) {
                 Pixel p = get_pixel_masque(I,j,i);
@@ -15,7 +15,7 @@
             }
         }
         ERREUR_FATALE("Tous les pixels sont blancs.");
-    }
+    } */
 
     //* Creer le nom de fichier correct pour la sauvegarde du .contours d'une image
     string get_fichier_contours(string nom) {
@@ -78,35 +78,40 @@
         //> Creation du robot qui determine le contour
         Robot r;
 
-        //> Tant que le masque contient au moins un pixel noir
-        while (!est_blanche(I)) {
-            
-            //? Affichage du masque de l'image a l'ecran pour du debugging
-            //? ecrire_masque(I); printf("\n");        
+        //> On parcourt chaque pixel de l'image
+        for (int y = 1; y <= hauteur_image(I); y++) {
+            for (int x = 1; x <= largeur_image(I); x++) {
 
-            //> Initialisation du robot avec les bonnes coordonnees de depart et orientation Est
-            Point pos_init = init_robot(&r, I);
+                //> Si le pixel du masque est blanc, on evite cette boucle
+                if (get_pixel_masque(I, x, y) == BLANC) continue;
+
+                //? Affichage du masque de l'image a l'ecran pour du debugging
+                //? ecrire_masque(I); printf("\n");        
+
+                //> Initialisation du robot avec les bonnes coordonnees de depart et orientation Est
+                Point pos_init = init_robot(&r, set_point(x, y));
             
-            //> Boucle tant que le contour n'est pas termine
-            bool boucle = true;
-            while (boucle) {
-                //> On enleve les pixels par lesquelles on passe du masque si on est oriente vers l'Est
-                if (get_orientation(r) == Est) set_pixel_masque(I, r.pos.x + 1, r.pos.y + 1, BLANC);
-                //> Stockage de la position actuel dans la memoire
-                memoriser_pos(&r);
-                avancer(&r); 
-                //> Actualisation de l'orientation en fonction du contexte
-                update_ori(&r, I);
-                //> On verifie si on a termine le contour
-                if (compare_point(get_position(r), pos_init) && (get_orientation(r) == Est)) {
-                    boucle = false;
+                //> Boucle tant que le contour n'est pas termine
+                bool boucle = true;
+                while (boucle) {
+                    //> On enleve les pixels par lesquelles on passe du masque si on est oriente vers l'Est
+                    if (get_orientation(r) == Est) set_pixel_masque(I, r.pos.x + 1, r.pos.y + 1, BLANC);
+                    //> Stockage de la position actuel dans la memoire
+                    memoriser_pos(&r);
+                    avancer(&r); 
+                    //> Actualisation de l'orientation en fonction du contexte
+                    update_ori(&r, I);
+                    //> On verifie si on a termine le contour
+                    if (compare_point(get_position(r), pos_init) && (get_orientation(r) == Est)) {
+                        boucle = false;
+                    }
                 }
+                //> On sauvegarde le premier/dernier point une nouvelle fois
+                memoriser_pos(&r);
+                
+                //> On sauvegarde la memoire du robot dans une fichier .contours
+                save_contour(r.memoire, get_fichier_contours(I.nom));
             }
-            //> On sauvegarde le premier/dernier point une nouvelle fois
-            memoriser_pos(&r);
-            
-            //> On sauvegarde la memoire du robot dans une fichier .contours
-            save_contour(r.memoire, get_fichier_contours(I.nom));
         }
     }
 

@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <math.h>
+
 /* type booleen */
 typedef char bool;
 #define false 0

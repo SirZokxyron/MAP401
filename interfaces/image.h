@@ -63,7 +63,4 @@
    //* AFficher le masque de l'image I a l'ecran
    void ecrire_masque(Image I);
 
-   //* Renvoie true si l'image masque est blanche, false sinon
-   bool est_blanche(Image I);
-
 #endif /* _IMAGE_H_ */ 

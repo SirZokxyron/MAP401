@@ -3,8 +3,8 @@
 /* Fonctions pour controller le robot */
 
     //* Met la position du robot au point (x, y) trouve par la fonction pos_depart et l'orientation EST
-    Point init_robot(Robot * r, Image I) {
-        r->pos = sub_point(pos_depart(I), set_point(1, 1));
+    Point init_robot(Robot * r, Point Depart) {
+        r->pos = sub_point(Depart, set_point(1, 1));
         r->ori = Est;
         init_liste(&r->memoire);
         return r->pos;
