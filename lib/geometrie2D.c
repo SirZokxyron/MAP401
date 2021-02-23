@@ -57,8 +57,8 @@
     //* Convertit une courbe de bezier de degre 2 en degre 3
     bezier3 deg2Vdeg3(bezier2 bezier) {
         Point C0 = bezier.C0;
-        Point C1 = scal_point(1/0.5, sub_point(bezier.C0, scal_point(1/(1-0.5), bezier.C0)));
-        Point C2 = scal_point(1/1-0.5, sub_point(bezier.C2, scal_point(1/0.5, bezier.C2)));
+        Point C1 = add_point(scal_point((1.0/3.0), bezier.C0), scal_point((2.0/3.0), bezier.C1));
+        Point C2 = add_point(scal_point((2.0/3.0), bezier.C1), scal_point((1.0/3.0), bezier.C2));
         Point C3 = bezier.C2;
         bezier3 nouv_bezier = {C0, C1, C2, C3};
         return nouv_bezier;
