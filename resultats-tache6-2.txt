@@ -1,0 +1,39 @@
+cheval.pbm
+    59 contours
+    pas de simplification   : 32,002 segments
+    d = 1                   : 3,157 segments
+    d = 2                   : 1,381 segments
+
+elephant-gotlib.pbm
+    313 contours
+    pas de simplification   : 115,564 segments
+    d = 1                   : 13,189 segments
+    d = 2                   : 4,281 segments
+
+
+goudyini-A.pbm
+    258 contours
+    pas de simplification   : 73,444 segments
+    d = 1                   : 5,335 segments
+    d = 2                   : 2,713 segments
+
+
+image_poly_tache6.pbm
+    3 contours
+    pas de simplification   : 488 segments
+    d = 1                   : 68 segments
+    d = 2                   : 44 segments
+
+
+JoaquimHock-LesArbres.pbm
+    543 contours
+    pas de simplification   : 231,284 segments
+    d = 1                   : 26,572 segments
+    d = 2                   : 13,090 segments
+
+
+papillon2.pbm
+    140 contours
+    pas de simplification   : 18,212 segments
+    d = 1                   : 1,913 segments
+    d = 2                   : 1,037 segments

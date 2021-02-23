@@ -79,6 +79,11 @@
         //> Creation du robot qui determine le contour
         Robot r;
 
+        double d;
+        if (simplification) {
+            printf("Distance seuil : "); scanf("%lf%*c", &d); printf("\n");
+        }
+
         //> On parcourt chaque pixel de l'image
         for (int y = 1; y <= hauteur_image(I); y++) {
             for (int x = 1; x <= largeur_image(I); x++) {
@@ -87,7 +92,7 @@
                 if (get_pixel_masque(I, x, y) == BLANC) continue;
 
                 //? Affichage du masque de l'image a l'ecran pour du debugging
-                //? ecrire_masque(I); printf("\n");        
+                //? ecrire_masque(I); printf("\n");
 
                 //> Initialisation du robot avec les bonnes coordonnees de depart et orientation Est
                 Point pos_init = init_robot(&r, set_point(x, y));
@@ -109,14 +114,11 @@
                 }
                 //> On sauvegarde le premier/dernier point une nouvelle fois
                 memoriser_pos(&r);
-                
-                double d;
                 liste L;
                 init_liste(&L);
                 //> Passage par une simplification si argument correspondant
                 switch (simplification) {
                     case 1:
-                        printf("Distance seuil : "); scanf("%lf%*c", &d); printf("\n");
                         L = simplification_douglas_peucker(r.memoire, 0, r.memoire.taille - 1, d);
                         break;
                     default:
