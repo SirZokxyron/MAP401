@@ -33,6 +33,37 @@
         printf("%s : (%lf, %lf)\n", nom, P.x, P.y);
     }
 
+/* Fonction pour les courbes de bezier */
+
+    //* Renvoie C(t) pour une courbe de degre 2
+    Point C_deg2(bezier2 bezier, reel t) {
+        Point C10 = add_point(scal_point(1-t, bezier.C0), scal_point(t, bezier.C1));
+        Point C11 = add_point(scal_point(1-t, bezier.C1), scal_point(t, bezier.C2));
+        Point Ct = add_point(scal_point(1-t, C10), scal_point(t, C11));
+        return Ct;
+    }
+
+    //* Renvoie C(t) pour une courbe de degre 3
+    Point C_deg3(bezier3 bezier, reel t) {
+        Point C10 = add_point(scal_point(1-t, bezier.C0), scal_point(t, bezier.C1));
+        Point C11 = add_point(scal_point(1-t, bezier.C1), scal_point(t, bezier.C2));
+        Point C12 = add_point(scal_point(1-t, bezier.C2), scal_point(t, bezier.C3));
+        Point C20 = add_point(scal_point(1-t, C10), scal_point(t, C11));
+        Point C21 = add_point(scal_point(1-t, C11), scal_point(t, C12));
+        Point Ct = add_point(scal_point(1-t, C20), scal_point(t, C21));
+        return Ct;
+    }
+
+    //* Convertit une courbe de bezier de degre 2 en degre 3
+    bezier3 deg2Vdeg3(bezier2 bezier) {
+        Point C0 = bezier.C0;
+        Point C1 = scal_point(1/0.5, sub_point(bezier.C0, scal_point(1/(1-0.5), bezier.C0)));
+        Point C2 = scal_point(1/1-0.5, sub_point(bezier.C2, scal_point(1/0.5, bezier.C2)));
+        Point C3 = bezier.C2;
+        bezier3 nouv_bezier = {C0, C1, C2, C3};
+        return nouv_bezier;
+    }
+
 /* Fonctions pour les vecteurs */
 
     //* Cree le vecteur de coordonnees : (x, y)

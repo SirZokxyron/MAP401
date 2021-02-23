@@ -16,6 +16,21 @@
         reel x, y;
     } Point;
 
+    //* Definition bezier2 definie par 3 points
+    typedef struct bezier2_ {
+        Point C0;
+        Point C1;
+        Point C2;
+    } bezier2;
+
+    //* Definition bezier3 definie par 4 points
+    typedef struct bezier3_ {
+        Point C0;
+        Point C1;
+        Point C2;
+        Point C3;
+    } bezier3;
+
     //* Definition vecteur a deux coordonnees reelles
     typedef struct Vecteur_ {
         reel x, y;
@@ -40,6 +55,17 @@
 
     //* Affiche les coordonnees d'un point derriere un nom specifie
     void affiche_point(Point P, char *nom);
+
+/* Fonction pour les courbes de bezier */
+
+    //* Renvoie C(t) pour une courbe de degre 2
+    Point C_deg2(bezier2 bezier, reel t);
+
+    //* Renvoie C(t) pour une courbe de degre 3
+    Point C_deg3(bezier3 bezier, reel t);
+
+    //* Convertit une courbe de bezier de degre 2 en degre 3
+    bezier3 deg2Vdeg3(bezier2 bezier);
 
 /* Fonctions pour les vecteurs */
 
