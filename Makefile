@@ -39,7 +39,7 @@ INCLUDEOPTS = -I$(INCDIR)
 COMPILOPTS = -g -Wall $(INCLUDEOPTS)
 
 # liste des executables
-EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_simplification test_bezier
+EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_distance test_simplification test_bezier
 
 #############################################################################
 # definition des regles
@@ -97,6 +97,8 @@ test_multiples_contours.o : $(EXEDIR)test_multiples_contours.c $(INCDIR)robot.h 
 
 simplification.o : $(LIBDIR)simplification.c $(INCDIR)simplification.h $(INCDIR)eps.h $(INCDIR)robot.h $(INCDIR)contours.h $(INCDIR)types_macros.h $(INCDIR)liste.h
 
+test_distance.o : $(EXEDIR)test_distance.c 
+
 test_simplification.o : $(EXEDIR)test_simplification.c simplification.o
 
 test_bezier.o : $(EXEDIR)test_bezier.c simplification.o
@@ -107,6 +109,8 @@ test_bezier.o : $(EXEDIR)test_bezier.c simplification.o
 test_image : test_image.o image.o 
 
 test_geometrie : test_geometrie.o geometrie2D.o
+
+test_distance : test_distance.o geometrie2D.o
 
 test_contours : test_contours.o contours.o robot.o geometrie2D.o image.o liste.o simplification.o
 
