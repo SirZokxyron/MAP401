@@ -35,6 +35,18 @@
 
 /* Fonction pour les courbes de bezier */
 
+    //* Definie une courbe de bezier de degre 2
+    bezier2 set_bezier2(Point C0, Point C1, Point C2) {
+        bezier2 B = {C0, C1, C2};
+        return B;
+    }
+
+    //* Definie une courbe de bezier de degre 3
+    bezier3 set_bezier3(Point C0, Point C1, Point C2, Point C3) {
+        bezier3 B = {C0, C1, C2, C3};
+        return B;
+    }
+
     //* Renvoie C(t) pour une courbe de degre 2
     Point C_deg2(bezier2 bezier, reel t) {
         Point C10 = add_point(scal_point(1-t, bezier.C0), scal_point(t, bezier.C1));

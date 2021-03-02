@@ -39,7 +39,7 @@ INCLUDEOPTS = -I$(INCDIR)
 COMPILOPTS = -g -Wall $(INCLUDEOPTS)
 
 # liste des executables
-EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_distance test_simplification test_bezier
+EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_distance test_simplification test_bezier test_fonction
 
 #############################################################################
 # definition des regles
@@ -103,6 +103,8 @@ test_simplification.o : $(EXEDIR)test_simplification.c simplification.o
 
 test_bezier.o : $(EXEDIR)test_bezier.c simplification.o
 
+test_fonction.o : $(EXEDIR)test_fonction.o simplification.o
+
 ########################################################
 # regles explicites de creation des executables
 
@@ -121,6 +123,8 @@ test_multiples_contours : test_multiples_contours.o eps.o contours.o robot.o geo
 test_simplification : test_simplification.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
 
 test_bezier : test_bezier.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
+
+test_fonction : test_fonction.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
 
 ########################################################
 # regle pour "nettoyer" le repertoire
