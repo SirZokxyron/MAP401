@@ -5,7 +5,7 @@ int main (int argc, char * argv[]) {
     
     //> Verification du nombre d'arguments
     if (argc != 4) {
-        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-1) attendus.");
+        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-1-2) attendus.");
     }
 
     //> Recuperation de l'image

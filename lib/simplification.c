@@ -33,38 +33,77 @@ liste simplification_douglas_peucker(liste C, int j1, int j2, double d) {
 }
 
 //* Renvoie une courbe de bezier de degre 2 approchant une liste de point
-bezier2 approx_bezier2(liste L) {
+bezier2 approx_bezier2(liste L, int j1, int j2) {
     tableau t = liste_V_tableau(L);
     bezier2 B;
     Point C0;
     Point C1;
     Point C2;
-    Point numerateur;
-    reel denominateur;
-    reel Ti;
-    reel Wi;
-    int n;
-    switch (t.taille) {
-        case 1:
-            C0 = t.tab[0];
-            C2 = t.tab[2];
-            C1 = scal_point(1.0/2.0, add_point(C0, C2));
-            B = set_bezier2(C0, C1, C2);
-            return B;
-        default:
-            n = t.taille - 1;
-            C0 = t.tab[0];
-            C2 = t.tab[n];
-            numerateur = set_point(0, 0);
-            denominateur = 0;
-            for(int i = 1; i <= (reel)n - 1; i++) {
-                Ti = (reel)i / (reel)n;
-                Wi = 2 * Ti * (1 - Ti);
-                numerateur = add_point(numerateur, (sub_point(t.tab[i], scal_point(pow((1 - Ti), 2), C0)), scal_point(pow(Ti, 2), C2)));
-                denominateur += Wi;
-            }
-            C1 = scal_point(1 / denominateur, numerateur);
-            B = set_bezier2(C0, C1, C2);
-            return B;
+    reel n = j2 - j1;
+    reel alpha;
+    reel beta; 
+    if (n == 1) {
+        C0 = t.tab[0];
+        C2 = t.tab[1];
+        C1 = scal_point(1.0/2.0, add_point(C0, C2));
+        B = set_bezier2(C0, C1, C2);
+    } else {
+        alpha = (3.0 * n) / ((n * n) - 1.0);            // 2
+        beta = (1.0 - (2.0 * n)) / (2.0 * (n + 1.0));   // -1/2
+        C0 = t.tab[0];
+        C2 = t.tab[(int)n];
+        Point C_tmp = set_point(0.0, 0.0);
+        for(int i = 1; i <= n - 1; i++) {
+            C_tmp = add_point(C_tmp, t.tab[i]);
+        }
+        C1 = add_point(scal_point(alpha, C_tmp), scal_point(beta, add_point(C0, C2)));
+        B = set_bezier2(C0, C1, C2);
+    } 
+    
+    return B;
+}
+
+liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
+
+    liste L;
+    init_liste(&L);
+
+    tableau t = liste_V_tableau(C);
+
+    int n = j2 - j1;
+    reel n_r = (reel)n;
+    int i;
+    reel t_i;
+    reel d_j;
+
+    bezier2 B = approx_bezier2(C, j1, j2);
+
+    int dmax = 0; 
+    int k = j1;
+    for (int j = j1 + 1; j <= j2; j++) {
+        i = j - j1;
+        t_i = (reel)i/n_r;
+        d_j = distance_point_bezier2(t.tab[j], B, t_i);
+        if (dmax < d_j) {
+            dmax = d_j;
+            k = j;
+        }
     }
+
+    printf("hello.\n");
+
+    if (dmax <= d) {
+        ajout_en_queue(&L, init_cellule(B.C0));
+        ajout_en_queue(&L, init_cellule(B.C1));
+        ajout_en_queue(&L, init_cellule(B.C2));
+    } else {
+        liste L1;
+        init_liste(&L1);
+        L1 = simplification_douglas_peucker_bezier2(C, j1, k, d);
+        liste L2;
+        init_liste(&L2);
+        L2 = simplification_douglas_peucker_bezier2(C, k, j2, d);
+        L = concat_liste(L1, L2);
+    }
+    return L;
 }

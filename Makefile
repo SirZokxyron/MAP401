@@ -103,7 +103,7 @@ test_simplification.o : $(EXEDIR)test_simplification.c simplification.o
 
 test_bezier.o : $(EXEDIR)test_bezier.c simplification.o
 
-test_fonction.o : $(EXEDIR)test_fonction.o simplification.o
+test_fonction.o : $(EXEDIR)test_fonction.c simplification.o
 
 ########################################################
 # regles explicites de creation des executables

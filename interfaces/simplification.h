@@ -8,7 +8,10 @@
 //* Renvoie la liste contenant les points d'une forme simplifiee par l'algorithme de Douglas Peucker avec une distance seuil d
 liste simplification_douglas_peucker(liste C, int j1, int j2, double d);
 
-//* Renvoied'une courbe de bezier de degre 2 approchant une liste de point
-bezier2 approx_bezier2(liste L);
+//* Renvoie d'une courbe de bezier de degre 2 approchant une liste de point
+bezier2 approx_bezier2(liste L, int j1, int j2);
+
+//* Renvoie de la simplification d'une liste de point par courbe de bezier2
+liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d);
 
 #endif

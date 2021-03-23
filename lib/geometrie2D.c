@@ -76,6 +76,13 @@
         return nouv_bezier;
     }
 
+    //* Renvoie la distance entre un point et une courbe de bezier2
+    reel distance_point_bezier2(Point Pj, bezier2 B, reel Ti) {
+        Point Ci = C_deg2(B, Ti);
+        Vecteur V = vect_bipoint(Pj, Ci);
+        return norme_vect(V);
+    }
+
 /* Fonctions pour les vecteurs */
 
     //* Cree le vecteur de coordonnees : (x, y)

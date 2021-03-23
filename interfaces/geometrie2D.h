@@ -73,6 +73,9 @@
     //* Convertit une courbe de bezier de degre 2 en degre 3
     bezier3 deg2Vdeg3(bezier2 bezier);
 
+    //* Renvoie la distance entre un point et une courbe de bezier2
+    reel distance_point_bezier2(Point Pj, bezier2 B, reel Ti);
+
 /* Fonctions pour les vecteurs */
 
     //* Cree le vecteur de coordonnees : (x, y)

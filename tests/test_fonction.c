@@ -6,15 +6,30 @@ int main () {
     
     //> Test fonction approx_bezier2
 
-    //cas n = 1
-    Point P0 = set_point(0, 0);
-    Point P1 = set_point(1, 1);
-    ajout_en_queue(&L, init_cellule(P0));
-    ajout_en_queue(&L, init_cellule(P1));
-    bezier2 B = approx_bezier2(L);
+    Point Q0 = set_point(0, 0);
+    Point Q1 = set_point(1, 0);
+    Point Q2 = set_point(1, 1);
+    Point Q3 = set_point(1, 2);
+    Point Q4 = set_point(2, 2);
+    Point Q5 = set_point(3, 2);
+    Point Q6 = set_point(3, 3);
+    Point Q7 = set_point(4, 3);
+    Point Q8 = set_point(5, 3);
 
-    affiche_point(P0, "P0");
-    affiche_point(P0, "P1");
+    ajout_en_queue(&L, init_cellule(Q0));
+    ajout_en_queue(&L, init_cellule(Q1));
+    ajout_en_queue(&L, init_cellule(Q2));
+    ajout_en_queue(&L, init_cellule(Q3));
+    ajout_en_queue(&L, init_cellule(Q4));
+    ajout_en_queue(&L, init_cellule(Q5));
+    ajout_en_queue(&L, init_cellule(Q6));
+    ajout_en_queue(&L, init_cellule(Q7));
+    ajout_en_queue(&L, init_cellule(Q8));
+    bezier2 B = approx_bezier2(L, 0, 8);
+
+  /* affiche_point(P0, "P0");
+    affiche_point(P1, "P1");
+    affiche_point(P2, "P2"); */
 
     affiche_point(B.C0, "C0");
     affiche_point(B.C1, "C1");
