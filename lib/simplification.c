@@ -43,18 +43,18 @@ bezier2 approx_bezier2(liste L, int j1, int j2) {
     reel alpha;
     reel beta; 
     if (n == 1) {
-        C0 = t.tab[0];
-        C2 = t.tab[1];
+        C0 = t.tab[j1];
+        C2 = t.tab[j2];
         C1 = scal_point(1.0/2.0, add_point(C0, C2));
         B = set_bezier2(C0, C1, C2);
     } else {
         alpha = (3.0 * n) / ((n * n) - 1.0);            // 2
         beta = (1.0 - (2.0 * n)) / (2.0 * (n + 1.0));   // -1/2
-        C0 = t.tab[0];
-        C2 = t.tab[(int)n];
+        C0 = t.tab[j1];
+        C2 = t.tab[j2];
         Point C_tmp = set_point(0.0, 0.0);
         for(int i = 1; i <= n - 1; i++) {
-            C_tmp = add_point(C_tmp, t.tab[i]);
+            C_tmp = add_point(C_tmp, t.tab[j1 + i]);
         }
         C1 = add_point(scal_point(alpha, C_tmp), scal_point(beta, add_point(C0, C2)));
         B = set_bezier2(C0, C1, C2);
@@ -78,7 +78,7 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
 
     bezier2 B = approx_bezier2(C, j1, j2);
 
-    int dmax = 0; 
+    reel dmax = 0.0; 
     int k = j1;
     for (int j = j1 + 1; j <= j2; j++) {
         i = j - j1;
@@ -89,8 +89,6 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
             k = j;
         }
     }
-
-    printf("hello.\n");
 
     if (dmax <= d) {
         ajout_en_queue(&L, init_cellule(B.C0));

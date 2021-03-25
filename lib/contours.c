@@ -120,7 +120,6 @@
                 switch (simplification) {
                     case 2:
                         L = simplification_douglas_peucker_bezier2(r.memoire, 0, r.memoire.taille - 1, d);
-                        ecrire_contour(L);
                         break;
                     case 1:
                         L = simplification_douglas_peucker(r.memoire, 0, r.memoire.taille - 1, d);
