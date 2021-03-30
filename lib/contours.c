@@ -68,6 +68,39 @@
         fclose(f);
     }
 
+    //* Affiche a l'ecran le nombre de contours et de segments totaux
+    void debug_bezier2(Image I) {
+        
+        //> Recuperation du fichier .contours correspond a l'image
+        string nom = get_fichier_contours(I.nom);
+        FILE * f = fopen(nom, "r");
+
+        //> Recuperation du nombre de contours
+        int nb_contours;
+        fscanf(f, "%d", &nb_contours);
+
+        //> Initialisation des variables pour la somme
+        int somme = 0;
+        int terme;
+
+        //> Iteration sur le nombre de contours
+        for (int contour_i = 0; contour_i < nb_contours; contour_i++) {
+            fscanf(f, "%d\n", &terme);
+            somme += terme;
+
+            //> On passe a travers les lignes des points
+            for (int segment_i = 0; segment_i < terme; segment_i++) {
+                fscanf(f, "%*[^\n]\n");
+            } 
+        }
+
+        //> Affichage du nombre de bezier2
+        printf("Nombre de bezier2 = %d\n", somme/3);
+
+        //> Fermeture du fichier
+        fclose(f);
+    }
+
     //* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours
     void determiner_contour(Image I, int simplification) {
 

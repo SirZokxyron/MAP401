@@ -48,8 +48,8 @@ bezier2 approx_bezier2(liste L, int j1, int j2) {
         C1 = scal_point(1.0/2.0, add_point(C0, C2));
         B = set_bezier2(C0, C1, C2);
     } else {
-        alpha = (3.0 * n) / ((n * n) - 1.0);            // 2
-        beta = (1.0 - (2.0 * n)) / (2.0 * (n + 1.0));   // -1/2
+        alpha = (3.0 * n) / ((n * n) - 1.0);            
+        beta = (1.0 - (2.0 * n)) / (2.0 * (n + 1.0));   
         C0 = t.tab[j1];
         C2 = t.tab[j2];
         Point C_tmp = set_point(0.0, 0.0);

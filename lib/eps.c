@@ -59,6 +59,13 @@ string creer_point(Point A, float r) {
     return commande;
 }
 
+//* Renvoie la commande .eps pour tracer une courbe de bezier
+string creer_bezier(bezier3 B) {
+    string commande = (string)malloc(128);
+    sprintf(commande, "%lf %lf %lf %lf %lf %lf curveto\n", B.C1.x, B.C1.y, B.C2.x, B.C2.y, B.C3.x, B.C3.y);
+    return commande;
+}
+
 //* Renvoie la commande .eps pour initialiser les parametres de traces
 string set_graphics(int R, int G, int B, float epaisseur) {
     string commande = (string)malloc(64);
@@ -192,3 +199,71 @@ void creer_eps(Image I, int mode) {
     fclose(fichierEps);
     fclose(fichierContour);
 }
+
+//* Cree le fichier .eps du contour d'une image simplifiee par Bezier
+void creer_eps_bezier(Image I, int deg, int mode) {
+    
+    //> Recuperation du fichier .contours
+    string fichier_contour = get_fichier_contours(I.nom);
+    FILE * fichierContour = fopen(fichier_contour, "r");
+    if (!fichierContour) ERREUR_FATALE("[Erreur]\tcreer_eps_bezier\tFichier .contours non trouve.");
+
+    //> Creation du fichier .eps
+    string fichier_eps = get_fichier_eps(I.nom, mode);
+    FILE * fichierEps = fopen(fichier_eps, "w");
+
+    fprintf(fichierEps, "%s", header());
+    fprintf(fichierEps, "%s", bounding_box(-5, -5, largeur_image(I) + 5, hauteur_image(I) + 5));
+
+    //> On recupere le nombre de contours
+    int nb_contours;
+    fscanf(fichierContour, "%d", &nb_contours);
+    for (int contours_i = 0; contours_i < nb_contours; contours_i++) {
+        //> On cree un nouvel objet
+        fprintf(fichierEps, "%s", nouvel_objet());
+        //> On recupere le nombre de points
+        int nb_points;
+        fscanf(fichierContour, "%d", &nb_points);
+        //> On itere sur chaque bezier
+        for (int point_i = 0; point_i < nb_points/(deg + 1); point_i++) {
+
+            //> On recupere les coordonnees des 3 prochains points
+            double x0 = 0.0; double y0 = 0.0; fscanf(fichierContour, "%lf %lf", &x0, &y0); Point P0 = repare_point(I, set_point(x0, y0));
+            double x1 = 0.0; double y1 = 0.0; fscanf(fichierContour, "%lf %lf", &x1, &y1); Point P1 = repare_point(I, set_point(x1, y1));
+            double x2 = 0.0; double y2 = 0.0; fscanf(fichierContour, "%lf %lf", &x2, &y2); Point P2 = repare_point(I, set_point(x2, y2));
+            double x3, y3; Point P3; bezier2 B2; bezier3 B3;
+            if (deg == 3) {
+                x3 = 0.0; y3 = 0.0; fscanf(fichierContour, "%lf %lf", &x3, &y3); P3 = repare_point(I, set_point(x3, y3));
+                B3 = set_bezier3(P0, P1, P2, P3);
+            } else {
+                B2 = set_bezier2(P0, P1, P2);
+                B3 = deg2Vdeg3(B2);
+            }
+
+            //> On positionne a C0
+            fprintf(fichierEps, "%s", positionner(B3.C0));
+
+            //> On trace la courbe de bezier
+            fprintf(fichierEps, "%s", creer_bezier(B3));
+        }
+        fprintf(fichierEps, "%s", finir_objet());
+    }
+    
+    if (mode == 1) {
+        //? Mode 1 : On trace tous le contour
+        fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
+        fprintf(fichierEps, "%s", tracer());
+    }
+
+    if (mode == 3) { 
+        //? Mode 3 : On rempli les formes
+        fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
+        fprintf(fichierEps, "%s", remplir());
+    }
+
+    //> On termine le formet .eps et on ferme les fichiers
+    fprintf(fichierEps, "%s", affiche_eps());
+    fclose(fichierEps);
+    fclose(fichierContour);
+}
+

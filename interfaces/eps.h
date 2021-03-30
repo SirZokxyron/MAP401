@@ -27,6 +27,9 @@ string creer_segment(Point A);
 //* Renvoie la commande .eps pour tracer un point au point A de rayon r
 string creer_point(Point A, float r);
 
+//* Renvoie la commande .eps pour tracer une courbe de bezier
+string creer_bezier(bezier3 B);
+
 //* Renvoie la commande .eps pour initialiser les parametres de traces
 string set_graphics(int R, int G, int B, float epaisseur);
 
@@ -47,5 +50,8 @@ string get_fichier_eps(string nom, int mode);
 //*     2 - Contour avec segments et points
 //*     3 - Contour et remplissage de la forme detouree
 void creer_eps(Image I, int mode);
- 
+
+//* Cree le fichier .eps du contour d'une image simplifiee par Bezier
+void creer_eps_bezier(Image I, int deg, int mode);
+
 #endif
