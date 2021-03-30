@@ -83,6 +83,13 @@
         return norme_vect(V);
     }
 
+    //* Renvoie la distance entre un point et une courbe de bezier3
+    reel distance_point_bezier3(Point Pj, bezier3 B, reel Ti) {
+        Point Ci = C_deg3(B, Ti);
+        Vecteur V = vect_bipoint(Pj, Ci);
+        return norme_vect(V);
+    }
+
 /* Fonctions pour les vecteurs */
 
     //* Cree le vecteur de coordonnees : (x, y)

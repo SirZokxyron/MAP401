@@ -20,6 +20,9 @@
     //* AFfiche a l'ecran le nombre de bezier2
     void debug_bezier2(Image I);
 
+    //* Affiche a l'ecran le nombre de bezier3
+    void debug_bezier3(Image I);
+
     //* Renvoie le contour d'une image passee en argument selon l'algorithme vu en cours
     void determiner_contour(Image I, int simplification);
 

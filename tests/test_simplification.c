@@ -5,7 +5,7 @@ int main (int argc, char * argv[]) {
     
     //> Verification du nombre d'arguments
     if (argc != 5) {
-        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-2) attendus, le mode de debug (0-3)");
+        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-3) attendus, le mode de debug (0-3)");
     }
 
     //> Recuperation de l'image
@@ -29,6 +29,8 @@ int main (int argc, char * argv[]) {
             debug_bezier2(I);
             break;
         case 3:
+            debug_bezier3(I);
+            break;
         default:
             break;
     }

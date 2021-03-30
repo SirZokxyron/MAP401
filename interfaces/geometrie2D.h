@@ -76,6 +76,9 @@
     //* Renvoie la distance entre un point et une courbe de bezier2
     reel distance_point_bezier2(Point Pj, bezier2 B, reel Ti);
 
+    //* Renvoie la distance entre un point et une courbe de bezier3
+    reel distance_point_bezier3(Point Pj, bezier3 B, reel Ti);
+
 /* Fonctions pour les vecteurs */
 
     //* Cree le vecteur de coordonnees : (x, y)

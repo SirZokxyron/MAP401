@@ -202,6 +202,8 @@ void creer_eps(Image I, int mode) {
 
 //* Cree le fichier .eps du contour d'une image simplifiee par Bezier
 void creer_eps_bezier(Image I, int deg, int mode) {
+
+    bool flag_start = false;
     
     //> Recuperation du fichier .contours
     string fichier_contour = get_fichier_contours(I.nom);
@@ -220,7 +222,7 @@ void creer_eps_bezier(Image I, int deg, int mode) {
     fscanf(fichierContour, "%d", &nb_contours);
     for (int contours_i = 0; contours_i < nb_contours; contours_i++) {
         //> On cree un nouvel objet
-        fprintf(fichierEps, "%s", nouvel_objet());
+        //fprintf(fichierEps, "%s", nouvel_objet());
         //> On recupere le nombre de points
         int nb_points;
         fscanf(fichierContour, "%d", &nb_points);
@@ -241,22 +243,26 @@ void creer_eps_bezier(Image I, int deg, int mode) {
             }
 
             //> On positionne a C0
-            fprintf(fichierEps, "%s", positionner(B3.C0));
+            if (flag_start == false) {
+                fprintf(fichierEps, "%s", positionner(B3.C0));
+                flag_start = true;
+            }
 
             //> On trace la courbe de bezier
             fprintf(fichierEps, "%s", creer_bezier(B3));
         }
-        fprintf(fichierEps, "%s", finir_objet());
+        //fprintf(fichierEps, "%s", finir_objet());
+        flag_start = false;
     }
     
     if (mode == 1) {
-        //? Mode 1 : On trace tous le contour
+        //? Mode 1 : On trace tout le contour
         fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
         fprintf(fichierEps, "%s", tracer());
     }
 
     if (mode == 3) { 
-        //? Mode 3 : On rempli les formes
+        //? Mode 3 : On remplit les formes
         fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
         fprintf(fichierEps, "%s", remplir());
     }
