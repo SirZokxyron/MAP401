@@ -146,8 +146,6 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
 
 liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
 
-    printf("whatever.\n");
-
     liste L;
     init_liste(&L);
 
@@ -174,7 +172,6 @@ liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
     }
 
     if (dmax <= d) {
-        printf("cas dmax<=d\n");
         ajout_en_queue(&L, init_cellule(B.C0));
         ajout_en_queue(&L, init_cellule(B.C1));
         ajout_en_queue(&L, init_cellule(B.C2));

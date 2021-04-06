@@ -101,6 +101,8 @@ test_distance.o : $(EXEDIR)test_distance.c
 
 test_simplification.o : $(EXEDIR)test_simplification.c simplification.o
 
+test_robustesse.o : $(EXEDIR)test_robustesse.c simplification.o
+
 test_bezier.o : $(EXEDIR)test_bezier.c simplification.o
 
 test_fonction.o : $(EXEDIR)test_fonction.c simplification.o
@@ -121,6 +123,8 @@ test_eps : test_eps.o eps.o robot.o geometrie2D.o image.o liste.o contours.o sim
 test_multiples_contours : test_multiples_contours.o eps.o contours.o robot.o geometrie2D.o image.o liste.o simplification.o
 
 test_simplification : test_simplification.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
+
+test_robustesse : test_robustesse.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
 
 test_bezier : test_bezier.o simplification.o eps.o contours.o robot.o geometrie2D.o image.o liste.o
 

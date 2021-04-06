@@ -5,7 +5,7 @@ int main (int argc, char * argv[]) {
     
     //> Verification du nombre d'arguments
     if (argc != 5) {
-        ERREUR_FATALE("[Erreur]\ttest__multiples_contours/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-3) attendus, le mode de debug (0-3)");
+        ERREUR_FATALE("[Erreur]\ttest_simplification/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-3) attendus, le mode de debug (0-3)");
     }
 
     //> Recuperation de l'image
@@ -36,9 +36,9 @@ int main (int argc, char * argv[]) {
     }
 
     //> Affichage du format .eps du contours
-    int mode = atoi(argv[2]);
-    if (mode <= 3) creer_eps(I, mode);
-    else creer_eps_bezier(I, atoi(argv[4]), mode - 3);
+    // int mode = atoi(argv[2]);
+    // if (mode <= 3) creer_eps(I, mode);
+    // else creer_eps_bezier(I, atoi(argv[4]), mode - 3);
 
     return 0;
 }

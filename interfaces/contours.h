@@ -17,7 +17,7 @@
     //* Affiche a l'ecran le nombre de contours et de segments totaux
     void debug_contour(Image I);
 
-    //* AFfiche a l'ecran le nombre de bezier2
+    //* Affiche a l'ecran le nombre de bezier2
     void debug_bezier2(Image I);
 
     //* Affiche a l'ecran le nombre de bezier3
