@@ -39,7 +39,7 @@ INCLUDEOPTS = -I$(INCDIR)
 COMPILOPTS = -g -Wall $(INCLUDEOPTS)
 
 # liste des executables
-EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_distance test_simplification test_bezier test_fonction
+EXECUTABLES = test_image test_geometrie test_contours test_eps test_multiples_contours test_distance test_simplification test_bezier test_fonction test_robustesse
 
 #############################################################################
 # definition des regles

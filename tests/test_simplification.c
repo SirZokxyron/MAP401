@@ -36,9 +36,9 @@ int main (int argc, char * argv[]) {
     }
 
     //> Affichage du format .eps du contours
-    // int mode = atoi(argv[2]);
-    // if (mode <= 3) creer_eps(I, mode);
-    // else creer_eps_bezier(I, atoi(argv[4]), mode - 3);
+    int mode = atoi(argv[2]);
+    if (mode <= 3) creer_eps(I, mode);
+    else creer_eps_bezier(I, atoi(argv[4]), mode - 3);
 
     return 0;
 }

@@ -200,6 +200,9 @@
 
                 //> On sauvegarde la memoire du robot dans une fichier .contours
                 save_contour(L, get_fichier_contours(I.nom));
+
+                free_list(&r.memoire);
+                if (simplification != 0) free_list(&L);
             }
         }
     }

@@ -45,6 +45,9 @@
     //* Concatene L2 a la suite de L1, renvoie L1 modifiee
     liste concat_liste(liste L1, liste L2);
 
+    //* Free une liste chainee
+    void free_list(liste * L);
+
     //* Convertit une liste chainee en un tableau de point
     tableau liste_V_tableau(liste L);
 

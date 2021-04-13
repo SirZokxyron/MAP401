@@ -51,6 +51,17 @@
         return L1;
     }
 
+    //* Free une liste chainee
+    void free_list(liste * L) {
+        cellule * p_actuel = L->tete;
+        cellule * p_apres;
+        while (p_actuel) {
+            p_apres = p_actuel->suivant;
+            free(p_actuel);
+            p_actuel = p_apres;
+        }
+    }
+
     //* Convertit une liste chainee en un tableau de point
     tableau liste_V_tableau(liste L) {
         tableau T;
