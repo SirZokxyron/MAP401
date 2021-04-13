@@ -141,6 +141,7 @@
         string commande = (string)malloc(128);
         sprintf(commande, "rm %s 2> /dev/null", get_fichier_contours(I.nom));
         system(commande);
+        free(commande);
 
         //> Creation du robot qui determine le contour
         Robot r;

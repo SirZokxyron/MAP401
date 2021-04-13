@@ -29,6 +29,8 @@ liste simplification_douglas_peucker(liste C, int j1, int j2, double d) {
         L = concat_liste(L1, L2);
     }
     
+    free(P.tab);
+
     return L;
 }
 
@@ -60,6 +62,8 @@ bezier2 approx_bezier2(liste L, int j1, int j2) {
         B = set_bezier2(C0, C1, C2);
     } 
     
+    free(t.tab);
+
     return B;
 }
 
@@ -97,6 +101,8 @@ bezier3 approx_bezier3(liste L, int j1, int j2) {
         C2 = add_point(scal_point(beta, t.tab[j1]), add_point(scal_point(lambda, C_tmp2), scal_point(alpha,t.tab[j2]))); 
         B = set_bezier3(C0, C1, C2, C3);
     }
+
+    free(t.tab);
 
     return B;
 }
@@ -141,6 +147,9 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
         L2 = simplification_douglas_peucker_bezier2(C, k, j2, d);
         L = concat_liste(L1, L2);
     }
+
+    free(t.tab);
+
     return L;
 }
 
@@ -185,6 +194,8 @@ liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
         L2 = simplification_douglas_peucker_bezier3(C, k, j2, d);
         L = concat_liste(L1, L2);
     }
-    //ecrire_contour(L);
+
+    free(t.tab);
+
     return L;
 }
