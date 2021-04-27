@@ -1,10 +1,11 @@
 #include "../interfaces/eps.h"
 
+//! Test pour la simplification par distance seuil
 int main (int argc, char * argv[]) {
 
     //> Verification du nombre d'arguments
     if (argc != 3) {
-        ERREUR_FATALE("[Erreur]\ttest_eps/main\tNombre d'argument incorrect, une image et un mode (1-3) attendue.");
+        ERREUR_FATALE("[Erreur]\ttest_eps/main\tNombre d'argument incorrect, une image et un mode (1-3) attendu.");
     }
 
     //> Chargement de notre image au format PBM
