@@ -4,41 +4,36 @@
 
 int main () {
 
-    liste L;
+    //> Verification du nombre d'arguments
+    if (argc != 5) {
+        ERREUR_FATALE("[Erreur]\ttest_simplification/main\tNombre d'argument incorrect, une image, un mode (1-3) et une simplification (0-3) attendus, le mode de debug (0-3)");
+    }
 
-    Point Q0 = set_point(0, 0);
-    Point Q1 = set_point(1, 0);
-    Point Q2 = set_point(1, 1);
-    Point Q3 = set_point(1, 2);
-    Point Q4 = set_point(2, 2);
-    Point Q5 = set_point(3, 2);
-    Point Q6 = set_point(3, 3);
-    Point Q7 = set_point(4, 3);
-    Point Q8 = set_point(5, 3);
-
-    ajout_en_queue(&L, init_cellule(Q0));
-    ajout_en_queue(&L, init_cellule(Q1));
-    ajout_en_queue(&L, init_cellule(Q2));
-    ajout_en_queue(&L, init_cellule(Q3));
-    ajout_en_queue(&L, init_cellule(Q4));
-    ajout_en_queue(&L, init_cellule(Q5));
-    ajout_en_queue(&L, init_cellule(Q6));
-    ajout_en_queue(&L, init_cellule(Q7));
-    ajout_en_queue(&L, init_cellule(Q8));
-    bezier2 B = approx_bezier2(L, 0, 8);
-
-  /* affiche_point(P0, "P0");
-    affiche_point(P1, "P1");
-    affiche_point(P2, "P2"); */
-
-    affiche_point(B.C0, "C0");
-    affiche_point(B.C1, "C1");
-    affiche_point(B.C2, "C2");
-
-    /* for(reel t = 0; t <= 1; t += 0.1) {
-        printf("C(%lf) = ", t);
-        affiche_point(C_deg2(B, t), "Point");
-    } */
+    //> Recuperation de l'image
+    Image I = lire_fichier_image(argv[1]);
+    
+    //> Calcul des multiples contours
+    determiner_contour(I, atoi(argv[3]));
+    
+    //> Affichage du nombre de contours et segments a l'ecran + creation du .eps
+    int mode = atoi(argv[2]);
+    switch (atoi(argv[4])) {
+        case 1:
+            debug_contour(I);
+            creer_eps(I, mode);
+            break;
+        case 2:
+            debug_bezier2(I);
+            creer_eps_bezier(I, atoi(argv[4]), mode);
+            break;
+        case 3:
+            debug_bezier3(I);
+            creer_eps_bezier(I, atoi(argv[4]), mode);
+            break;
+        default:
+            creer_eps(I, mode);
+            break;
+    }
 
     return 0;
 }
