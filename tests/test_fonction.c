@@ -1,10 +1,10 @@
 #include "../interfaces/simplification.h"
 
+//! Fichier brouillon pour nos tests en tous genres
+
 int main () {
 
     liste L;
-    
-    //> Test fonction approx_bezier2
 
     Point Q0 = set_point(0, 0);
     Point Q1 = set_point(1, 0);
