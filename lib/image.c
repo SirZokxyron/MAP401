@@ -91,7 +91,7 @@ UINT aire (Image I) {
 void entete_fichier_pbm(FILE *f) {
 	char *ligne;
 	size_t n;
-	ssize_t l_ligne;
+	size_t l_ligne;
 
 	// Position en debut de fichier
 	fseek(f, 0, SEEK_SET);
