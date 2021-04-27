@@ -94,15 +94,15 @@ string affiche_eps() {
 //* Renvoie le nom d'un fichier .eps correspondant a une image donnee
 string get_fichier_eps(string nom, int mode) {
     
-    //> Ajout du suffix ".eps" a la fin du nom
-    string suffix = ".eps";
-    string temp = (string)malloc(3 + strlen(nom) + strlen(suffix));
-    sprintf(temp, "%s_%d%s", nom, mode, suffix);
+    //> Ajout du e ".eps" a la fin du nom
+    string suffixe = ".eps";
+    string temp = (string)malloc(3 + strlen(nom) + strlen(suffixe));
+    sprintf(temp, "%s_%d%s", nom, mode, suffixe);
 
-    //> Ajout du prefix "build/" au debut du nom
-    string prefix = "build/";
-    string nom_f = (string)malloc(1 + strlen(prefix) + strlen(temp));
-    sprintf(nom_f, "%s%s", prefix, temp);
+    //> Ajout du prefixe "build/" au debut du nom
+    string prefixe = "build/";
+    string nom_f = (string)malloc(1 + strlen(prefixe) + strlen(temp));
+    sprintf(nom_f, "%s%s", prefixe, temp);
 
     return nom_f;
 }
@@ -175,12 +175,12 @@ void creer_eps(Image I, int mode) {
         }
        
         if (mode == 1) {
-            //? Mode 1 : On trace tous le contour
+            //? Mode 1 : On trace tout le contour
             fprintf(fichierEps, "%s", finir_objet());
             fprintf(fichierEps, "%s", set_graphics(0, 0, 0, 0.1));
             fprintf(fichierEps, "%s", tracer());
         } else if (mode == 2) {
-            //? Mode 2 : On creer le dernier cercle
+            //? Mode 2 : On cree le dernier cercle
             fprintf(fichierEps, "%s", creer_point(prev, 0.2));
         }       
     
