@@ -14,7 +14,7 @@ bezier2 approx_bezier2(liste L, int j1, int j2);
 //* Renvoie de la simplification d'une liste de point par courbe de bezier2
 liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d);
 
-//* Fonction gamma(k)
+//* Fonction gamma(k) (cf fonction approx bezier 3)
 reel gammaK (reel k, reel n);
 
 //* Renvoie une courbe de bezier de degre 3 approchant une liste de point

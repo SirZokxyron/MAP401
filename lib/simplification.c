@@ -3,8 +3,10 @@
 //* Renvoie la liste contenant les points d'une forme simplifiee par l'algorithme de Douglas Peucker avec une distance seuil d
 liste simplification_douglas_peucker(liste C, int j1, int j2, double d) {
     
+    //> On transforme notre liste de point en tableau de point
     tableau P = liste_V_tableau(C);
     
+    //> On cherche la distance max entre un point de notre contour et le segment
     double dmax = 0;
     int k = j1;
     for (int j = j1 + 1; j < j2; j++) {
@@ -17,10 +19,13 @@ liste simplification_douglas_peucker(liste C, int j1, int j2, double d) {
 
     liste L;
     init_liste(&L);
+    //> Si la distance max est en dessous de la distance seuil alors on simplifie par le premier et dernier point
     if (dmax <= d) {
         ajout_en_queue(&L, init_cellule(P.tab[j1]));
         ajout_en_queue(&L, init_cellule(P.tab[j2]));
-    } else {
+    } 
+    //> Si la distance max est au dessus de la distance seuil alors on divise le problème en deux
+    else {
         liste L1 = simplification_douglas_peucker(C, j1, k, d);
         liste L2 = simplification_douglas_peucker(C, k, j2, d); 
         //> On evite la duplication de points dans notre fichier .contours
@@ -29,6 +34,7 @@ liste simplification_douglas_peucker(liste C, int j1, int j2, double d) {
         L = concat_liste(L1, L2);
     }
     
+    //! On evite les fuites de memoire
     free(P.tab);
 
     return L;
@@ -36,7 +42,9 @@ liste simplification_douglas_peucker(liste C, int j1, int j2, double d) {
 
 //* Renvoie une courbe de bezier de degre 2 approchant une liste de point
 bezier2 approx_bezier2(liste L, int j1, int j2) {
+    //> On transforme notre liste en tableau de points
     tableau t = liste_V_tableau(L);
+    
     bezier2 B;
     Point C0;
     Point C1;
@@ -44,12 +52,18 @@ bezier2 approx_bezier2(liste L, int j1, int j2) {
     reel n = j2 - j1;
     reel alpha;
     reel beta; 
+    //> Cas ou il n'y a que deux point -> simplification par bezier de degre 1
     if (n == 1) {
         C0 = t.tab[j1];
         C2 = t.tab[j2];
+        //> Calcul de C1 qui est le milieu de [C0, C2]
         C1 = scal_point(1.0/2.0, add_point(C0, C2));
+        //> On initialise la courbe de bezier finale
         B = set_bezier2(C0, C1, C2);
-    } else {
+    } 
+    //> Cas ou il y a plus que 2 points -> simplification par bezier de degre 2
+    else {
+        //> Calcul des constantes alpha et beta
         alpha = (3.0 * n) / ((n * n) - 1.0);            
         beta = (1.0 - (2.0 * n)) / (2.0 * (n + 1.0));   
         C0 = t.tab[j1];
@@ -58,35 +72,44 @@ bezier2 approx_bezier2(liste L, int j1, int j2) {
         for(int i = 1; i <= n - 1; i++) {
             C_tmp = add_point(C_tmp, t.tab[j1 + i]);
         }
+        //> Calcul de C1 en utilisant alpha et beta
         C1 = add_point(scal_point(alpha, C_tmp), scal_point(beta, add_point(C0, C2)));
+        //> On initialise la courbe de bezier finale
         B = set_bezier2(C0, C1, C2);
     } 
     
+    //! On evite les fuites de memoire
     free(t.tab);
 
     return B;
 }
 
-//* Fonction gamma(k)
+//* Fonction gamma(k) (cf fonction approx bezier 3)
 reel gammaK (reel k, reel n) {
     return 6 * pow(k,4) - 8 * n * pow(k,3) + 6 * pow(k,2) - 4 * n * k + pow(n,4) - pow(n,2);
 }
 
 //* Renvoie une courbe de bezier de degre 3 approchant une liste de point
 bezier3 approx_bezier3(liste L, int j1, int j2) {
+    //> On transforme notre liste en tableau de points
     tableau t = liste_V_tableau(L);
     bezier3 B;
     Point C0, C1, C2, C3;
     reel n = j2 - j1;
     reel alpha, beta, lambda;
 
+    //> Si le nombre de point est inferieur a 4 -> on se ramene a une simplification de degre 2
     if (n < 3) {
         B = deg2Vdeg3(approx_bezier2(L, j1, j2));
-    } else {
+    } 
+    //> Si le nombre de point est egal ou superieur a 4 -> on simplifie par courbe de bezier de degre 3
+    else {
+        //> Calcul des constantes alpha, beta et lambda
         alpha = (-15*pow(n,3) + 5*pow(n,2) + 2*n + 4)/(3*(n+2)*(3*pow(n,2)+1));
         beta = (10*pow(n,3)-15*pow(n,2)+n+2)/(3*(n+2)*(3*pow(n,2)+1));
         lambda = (70*n)/(3*(pow(n,2)-1)*(pow(n,2)-4)*(3*pow(n,2)+1));
 
+        //> Initialisation des points C0 et C3
         C0 = t.tab[j1];
         C3 = t.tab[j2];
         Point C_tmp1 = set_point(0.0, 0.0);
@@ -97,11 +120,15 @@ bezier3 approx_bezier3(liste L, int j1, int j2) {
             C_tmp2 = add_point(C_tmp2, scal_point(gammaK(n-i,n), t.tab[j1+i]));
         }
 
+        //> Calcul de C1 et C2 en utilisant les formules donnees
         C1 = add_point(scal_point(alpha, t.tab[j1]), add_point(scal_point(lambda, C_tmp1), scal_point(beta,t.tab[j2]))); 
         C2 = add_point(scal_point(beta, t.tab[j1]), add_point(scal_point(lambda, C_tmp2), scal_point(alpha,t.tab[j2]))); 
+        
+        //> On initialise la courbe de bezier finale
         B = set_bezier3(C0, C1, C2, C3);
     }
 
+    //! On evite les fuites de memoire
     free(t.tab);
 
     return B;
@@ -112,6 +139,7 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
     liste L;
     init_liste(&L);
 
+    //> On transforme notre liste en tableau de points
     tableau t = liste_V_tableau(C);
 
     int n = j2 - j1;
@@ -122,6 +150,7 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
 
     bezier2 B = approx_bezier2(C, j1, j2);
 
+    //> On cherche la distance max entre un point de notre contour et l'approximation de la courbe de bezier 2
     reel dmax = 0.0; 
     int k = j1;
     for (int j = j1 + 1; j <= j2; j++) {
@@ -134,11 +163,14 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
         }
     }
 
+    //> Si la distance max est en dessous de la distance seuil alors on simplifie par une courbe de bezier de degre 2
     if (dmax <= d) {
         ajout_en_queue(&L, init_cellule(B.C0));
         ajout_en_queue(&L, init_cellule(B.C1));
         ajout_en_queue(&L, init_cellule(B.C2));
-    } else {
+    } 
+    //> Si la distance max est au dessus de la distance seuil alors on divise le problème en deux
+    else {
         liste L1;
         init_liste(&L1);
         L1 = simplification_douglas_peucker_bezier2(C, j1, k, d);
@@ -148,6 +180,7 @@ liste simplification_douglas_peucker_bezier2(liste C, int j1, int j2, reel d) {
         L = concat_liste(L1, L2);
     }
 
+    //! On evite les fuites de memoire
     free(t.tab);
 
     return L;
@@ -158,6 +191,7 @@ liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
     liste L;
     init_liste(&L);
 
+    //> On transforme notre liste en tableau de points
     tableau t = liste_V_tableau(C);
 
     int n = j2 - j1;
@@ -168,6 +202,7 @@ liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
 
     bezier3 B = approx_bezier3(C, j1, j2);
 
+    //> On cherche la distance max entre un point de notre contour et l'approximation de la courbe de bezier 2
     reel dmax = 0.0; 
     int k = j1;
     for (int j = j1 + 1; j <= j2; j++) {
@@ -180,12 +215,15 @@ liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
         }
     }
 
+    //> Si la distance max est en dessous de la distance seuil alors on simplifie par une courbe de bezier de degre 3
     if (dmax <= d) {
         ajout_en_queue(&L, init_cellule(B.C0));
         ajout_en_queue(&L, init_cellule(B.C1));
         ajout_en_queue(&L, init_cellule(B.C2));
         ajout_en_queue(&L, init_cellule(B.C3));
-    } else {
+    } 
+    //> Si la distance max est au dessus de la distance seuil alors on divise le problème en deux
+    else {
         liste L1;
         init_liste(&L1);
         L1 = simplification_douglas_peucker_bezier3(C, j1, k, d);
@@ -195,6 +233,7 @@ liste simplification_douglas_peucker_bezier3(liste C, int j1, int j2, reel d) {
         L = concat_liste(L1, L2);
     }
 
+    //! On evite les fuites de memoire
     free(t.tab);
 
     return L;
