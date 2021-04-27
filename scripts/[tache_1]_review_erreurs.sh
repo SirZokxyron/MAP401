@@ -13,4 +13,4 @@ echo "      Execution de ./test_image $file        "
 echo "---------------------------------------------"
 ./test_image $file
 done
-make clear-
+make clear
