@@ -183,16 +183,17 @@
                 memoriser_pos(&r);
                 liste L;
                 init_liste(&L);
+                tableau tab_memoire = liste_V_tableau(r.memoire);
                 //> Passage par une simplification si argument correspondant
                 switch (simplification) {
                     case 3:
-                        L = simplification_douglas_peucker_bezier3(r.memoire, 0, r.memoire.taille - 1, d);
+                        L = simplification_douglas_peucker_bezier3(tab_memoire, 0, tab_memoire.taille - 1, d);
                         break;
                     case 2:
-                        L = simplification_douglas_peucker_bezier2(r.memoire, 0, r.memoire.taille - 1, d);
+                        L = simplification_douglas_peucker_bezier2(tab_memoire, 0, tab_memoire.taille - 1, d);
                         break;
                     case 1:
-                        L = simplification_douglas_peucker(r.memoire, 0, r.memoire.taille - 1, d);
+                        L = simplification_douglas_peucker(tab_memoire, 0, tab_memoire.taille - 1, d);
                         break;
                     default:
                         L = r.memoire;
